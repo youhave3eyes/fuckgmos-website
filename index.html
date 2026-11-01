@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Know your seeds. Eat real food. Evidence-graded lessons on GMOs and the food system, for kids and scientists.">
+<title>FUCK GMOs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: protest-poster headlines + sticker-style cards over a field-green paper; one sticky bar with the reading-level switch. */
+:root{
+  --bg:#EDF1E4; --surface:#FBFCF7; --surface-2:#DFE6D2; --ink:#11140F; --muted:#4E5646; --line:#11140F;
+  --green:#169A44; --green-ink:#0A6A2B; --red:#DD2E28; --yellow:#FFC531; --clay:#B45E2B; --sky:#3FA6D6; --soil:#5A3920; --soil-2:#7A5232;
+  --on-accent:#11140F; --paper:#FBFCF7;
+  --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --body:'Atkinson Hyperlegible',system-ui,-apple-system,sans-serif;
+  --kid:'Fredoka','Trebuchet MS',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D100C; --surface:#161A14; --surface-2:#20271D; --ink:#ECF1E3; --muted:#A3AC98; --line:#ECF1E3;
+  --green:#36CF65; --green-ink:#7FE7A0; --red:#FF5A4E; --yellow:#FFCF4A; --clay:#DA8550; --sky:#68C1EA; --soil:#4A2F1B; --soil-2:#6A4529; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D100C; --surface:#161A14; --surface-2:#20271D; --ink:#ECF1E3; --muted:#A3AC98; --line:#ECF1E3;
+  --green:#36CF65; --green-ink:#7FE7A0; --red:#FF5A4E; --yellow:#FFCF4A; --clay:#DA8550; --sky:#68C1EA; --soil:#4A2F1B; --soil-2:#6A4529; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--green-ink);text-underline-offset:3px}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;line-height:.95;margin:0;text-wrap:balance;letter-spacing:.005em}
+h2{font-size:clamp(2.6rem,8vw,4.6rem);font-weight:900}
+h3{font-size:1.65rem;font-weight:800}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:18px}
+section{padding-block:64px;border-top:3px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.lede{font-size:1.15rem;max-width:62ch;color:var(--muted)}
+.sec-head{display:grid;gap:12px;margin-bottom:34px}
+.stack{display:grid;gap:14px}
+.muted{color:var(--muted)}
+
+/* reading levels */
+body[data-level="kid"] .lv:not(.k),body[data-level="teen"] .lv:not(.t),body[data-level="expert"] .lv:not(.e){display:none!important}
+body[data-level="kid"] h1,body[data-level="kid"] h2,body[data-level="kid"] h3{font-family:var(--kid);text-transform:none;letter-spacing:0;line-height:1.05}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:3px solid var(--line)}
+.bar-in{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:10px}
+.bar .logo{font-size:1.9rem}
+.nav{display:flex;gap:6px;overflow-x:auto;flex:1 1 300px;min-width:0;scrollbar-width:none;order:3;flex-basis:100%}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:6px 10px;border:2px solid var(--line);border-radius:999px;background:var(--surface)}
+.nav a:hover{background:var(--yellow);color:var(--on-accent)}
+.level{margin-left:auto;display:flex;border:2.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
+.level button{all:unset;cursor:pointer;font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;color:var(--ink)}
+.level button[aria-checked="true"]{background:var(--ink);color:var(--bg)}
+.level button:focus-visible{outline:3px solid var(--sky);outline-offset:-3px}
+@media (min-width:900px){.nav{order:0;flex-basis:auto}.level{margin-left:0}}
+
+/* logo */
+.logo{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.8;letter-spacing:-.01em;display:inline-flex;gap:.18em;align-items:baseline;white-space:nowrap;color:var(--ink);text-decoration:none}
+.logo .w1{color:var(--red)}
+.logo .w2{display:inline-flex;align-items:baseline}
+.omark{height:.74em;width:.74em;margin:0 .02em;align-self:center;transform:translateY(-.01em);overflow:visible}
+.logo.stacked{flex-direction:column;gap:0;align-items:flex-start}
+.kidlogo{font-family:var(--kid);font-weight:700;display:inline-flex;align-items:center;gap:.3em;color:var(--green-ink);text-decoration:none;line-height:1;white-space:nowrap}
+.kidlogo svg{height:1.1em;width:1.1em}
+.bar .kidlogo{font-size:1.5rem}
+body[data-level="kid"] .bar .logo.main{display:none}
+body:not([data-level="kid"]) .bar .logo.kidf{display:none}
+body[data-level="kid"] h1.logo{font-family:var(--display);text-transform:uppercase;line-height:.8;letter-spacing:-.01em}
+
+/* hero */
+.hero{padding-block:48px 56px;border-top:0;overflow:hidden;position:relative}
+.hero-grid{display:grid;gap:34px;align-items:center}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.25fr 1fr}}
+.hero .logo{font-size:clamp(5rem,22vw,11.5rem)}
+.hook{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,4.5vw,2.4rem);text-transform:uppercase;line-height:1;margin-top:18px}
+.hook em{font-style:normal;background:var(--yellow);color:var(--on-accent);padding:0 .15em}
+.hero p.lede{margin-top:14px}
+.doors{display:grid;gap:14px}
+.door{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;text-decoration:none;color:var(--ink);background:var(--surface);border:3px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:5px 5px 0 var(--line);transition:transform .15s,box-shadow .15s}
+.door:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--line)}
+.door:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--line)}
+.door b{font-family:var(--display);font-size:1.7rem;text-transform:uppercase;font-weight:900;line-height:1;display:block}
+.door span{font-size:.92rem;color:var(--muted)}
+.door .ic{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;border:2.5px solid var(--line)}
+.door .arr{font-family:var(--mono);font-weight:700;font-size:1.3rem}
+.ticker{margin-top:40px;border-block:3px solid var(--line);background:var(--ink);color:var(--bg);overflow:hidden;white-space:nowrap}
+.ticker div{display:inline-block;padding:10px 0;font-family:var(--display);font-weight:800;font-size:1.35rem;text-transform:uppercase;letter-spacing:.03em;animation:tick 38s linear infinite}
+.ticker i{font-style:normal;color:var(--yellow);margin:0 .7em}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* generic card + buttons */
+.card{background:var(--surface);border:3px solid var(--line);border-radius:var(--r);padding:20px}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:11px 16px;border:2.5px solid var(--line);border-radius:10px;background:var(--yellow);color:var(--on-accent);box-shadow:3px 3px 0 var(--line);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--line)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+.btn.ghost{background:var(--surface);color:var(--ink)}
+.btn.green{background:var(--green);color:var(--on-accent)}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.btn:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.row{display:flex;flex-wrap:wrap;gap:10px}
+
+/* badges and source chips */
+.badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border:2px solid var(--line);border-radius:999px;white-space:nowrap}
+.badge::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.b-strong{color:var(--green-ink)} .b-mixed{color:var(--clay)} .b-debated{color:var(--red)}
+.src{font-family:var(--mono);font-size:.7rem;font-weight:700;text-decoration:none;border:1.5px solid currentColor;border-radius:6px;padding:1px 6px;color:var(--muted);white-space:nowrap;vertical-align:1px}
+.src:hover{color:var(--ink);background:var(--yellow);border-color:var(--line)}
+
+/* KID MODE */
+.kid{background:var(--surface-2)}
+.kid h2,.kid h3{font-family:var(--kid);text-transform:none;letter-spacing:0;line-height:1.05}
+.kid .lede{font-family:var(--kid);font-weight:500;color:var(--ink)}
+.kidtag{display:inline-flex;align-self:start;justify-self:start;font-family:var(--kid);font-weight:600;background:var(--green);color:var(--on-accent);border:2.5px solid var(--line);border-radius:999px;padding:3px 14px}
+.story{display:grid;gap:28px}
+@media (min-width:860px){.story{grid-template-columns:1fr 1fr;align-items:start}.story .stage{position:sticky;top:120px}}
+.stage{background:var(--sky);border:3px solid var(--line);border-radius:22px;overflow:hidden;aspect-ratio:1/1;max-width:100%}
+.stage svg{display:block;width:100%;height:100%}
+.steps{display:grid;gap:18px}
+.step{font-family:var(--kid);background:var(--surface);border:3px solid var(--line);border-radius:18px;padding:18px 20px;box-shadow:4px 4px 0 var(--line)}
+.step b{display:block;font-size:1.3rem;margin-bottom:4px}
+.step .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--yellow);color:var(--on-accent);border:2px solid var(--line);font-weight:700;margin-right:8px;font-size:.95rem}
+#plant .stem{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--g,1))}
+#plant .leaf{transform-box:fill-box;transform:scale(clamp(0,calc((var(--g,1) - .3) * 3),1))}
+#plant .leaf.l1{transform-origin:right bottom}#plant .leaf.l2{transform-origin:left bottom}
+#plant .bloom{transform-box:fill-box;transform-origin:center;transform:scale(clamp(0,calc((var(--g,1) - .7) * 3.4),1))}
+#plant .rootline{stroke-dasharray:1;stroke-dashoffset:calc(1 - clamp(0,calc(var(--g,1) * 1.6),1))}
+.sun{animation:spin 30s linear infinite;transform-origin:320px 70px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.worm{animation:wig 3.2s ease-in-out infinite}
+@keyframes wig{50%{transform:translateX(10px)}}
+
+.soil-wrap{display:grid;gap:18px;margin-top:44px}
+@media (min-width:860px){.soil-wrap{grid-template-columns:1.1fr 1fr;align-items:center}}
+.soilbox{border:3px solid var(--line);border-radius:22px;overflow:hidden;background:var(--soil)}
+.soilbox svg{display:block;width:100%;height:auto}
+.microbe{animation:float 4s ease-in-out infinite}
+.microbe:nth-child(2n){animation-duration:5.5s}.microbe:nth-child(3n){animation-delay:-2s}
+@keyframes float{50%{transform:translate(6px,-8px)}}
+.drift{opacity:0;transition:opacity .5s}
+.toxic .drift{opacity:1}
+.drift circle{animation:fall 2.4s linear infinite}
+.drift circle:nth-child(2n){animation-delay:-1.2s}.drift circle:nth-child(3n){animation-delay:-.6s}
+@keyframes fall{from{transform:translateY(-30px)}to{transform:translateY(120px);opacity:0}}
+.alive{transition:opacity .6s}
+.toxic .alive{opacity:.15}
+.toxic .grass{fill:#8A8F52}
+.grass{transition:fill .6s}
+
+/* sort game */
+.game{margin-top:44px;font-family:var(--kid)}
+.tray{display:flex;flex-wrap:wrap;gap:10px;margin-block:16px;min-height:58px}
+.food{all:unset;cursor:pointer;font-family:var(--kid);font-weight:600;background:var(--surface);border:2.5px solid var(--line);border-radius:14px;padding:9px 14px;box-shadow:3px 3px 0 var(--line);transition:transform .15s}
+.food[aria-pressed="true"]{background:var(--yellow);color:var(--on-accent);transform:translateY(-4px) rotate(-3deg)}
+.food:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.bins{display:grid;gap:14px}
+@media (min-width:640px){.bins{grid-template-columns:1fr 1fr}}
+.bin{all:unset;cursor:pointer;display:block;border:3px dashed var(--line);border-radius:18px;padding:16px;min-height:110px;background:var(--surface)}
+.bin b{display:block;font-size:1.15rem;margin-bottom:8px}
+.bin .got{display:flex;flex-wrap:wrap;gap:6px}
+.bin .got span{font-size:.88rem;border:2px solid var(--line);border-radius:10px;padding:3px 9px}
+.bin .got span.ok{background:var(--green);color:var(--on-accent)}
+.bin .got span.no{background:var(--red);color:var(--on-accent)}
+.bin:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.gamemsg{font-weight:600;min-height:1.6em}
+
+/* quick facts flip cards */
+.facts{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.fact{perspective:1000px;min-height:300px;cursor:pointer;border-radius:var(--r)}
+.fact-in{position:relative;height:100%;min-height:300px;transition:transform .55s cubic-bezier(.3,1.4,.5,1);transform-style:preserve-3d}
+.fact.flip .fact-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:3px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px;box-shadow:5px 5px 0 var(--line);overflow:auto}
+.front{background:var(--surface)}
+.front .big{font-family:var(--display);font-weight:900;font-size:3.6rem;line-height:.85;color:var(--red)}
+.front p{font-family:var(--display);font-weight:800;font-size:1.45rem;line-height:1.02;text-transform:uppercase}
+body[data-level="kid"] .front p{font-family:var(--kid);text-transform:none;font-weight:600}
+.front .tap{margin-top:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.back{background:var(--ink);color:var(--bg);transform:rotateY(180deg);font-size:.95rem;line-height:1.45}
+.back .badge{border-color:var(--bg)}
+.back .b-strong{color:#7FE7A0}.back .b-mixed{color:#F2A46E}.back .b-debated{color:#FF8A80}
+.back .src{color:var(--bg)}
+.back .foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.fact:hover .face.front{box-shadow:8px 8px 0 var(--red)}
+
+/* DNA zoom */
+.dna{display:grid;gap:18px;margin-top:44px}
+@media (min-width:860px){.dna{grid-template-columns:1.1fr 1fr;align-items:center}}
+.zoombox{position:relative;aspect-ratio:4/3;border:3px solid var(--line);border-radius:22px;overflow:hidden;background:var(--surface)}
+.zoombox svg{position:absolute;inset:0;width:100%;height:100%;transition:opacity .5s,transform .7s cubic-bezier(.6,0,.3,1)}
+.zoombox svg:not(.on){opacity:0;transform:scale(.4);pointer-events:none}
+.zoombox svg.out{transform:scale(3)}
+.zoomtabs{display:flex;gap:8px;flex-wrap:wrap}
+.helix-spin{animation:hx 6s linear infinite}
+@keyframes hx{to{transform:translateX(-80px)}}
+
+/* deep dive */
+.topics{display:grid;gap:18px}
+.topic{background:var(--surface);border:3px solid var(--line);border-radius:var(--r);overflow:hidden}
+.topic-head{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:20px;align-items:start}
+.topic-num{font-family:var(--display);font-weight:900;font-size:3rem;line-height:.8;color:var(--red);min-width:1.4ch}
+.topic-head .stack{gap:8px;min-width:0}
+.topic details{border-top:2px solid var(--line)}
+.topic summary{cursor:pointer;list-style:none;padding:12px 20px;font-family:var(--mono);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
+.topic summary::-webkit-details-marker{display:none}
+.topic summary::after{content:"+";font-size:1.1rem;line-height:1}
+.topic details[open] summary::after{content:"–"}
+.topic summary:hover{background:var(--surface-2)}
+.topic .body{padding:4px 20px 20px;display:grid;gap:10px;max-width:75ch}
+.topic .body ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.datafig{overflow-x:auto}
+
+/* field */
+.field-wrap{display:grid;gap:18px;margin-top:44px}
+@media (min-width:860px){.field-wrap{grid-template-columns:1.2fr 1fr;align-items:center}}
+.fieldbox{border:3px solid var(--line);border-radius:22px;overflow:hidden;background:#C9A26B}
+.fieldbox svg{display:block;width:100%;height:auto}
+.fieldbox .pl{transition:filter .4s,opacity .4s,transform .4s;transform-box:fill-box;transform-origin:bottom center}
+.fieldbox .pl.sick{filter:grayscale(1) sepia(1) brightness(.6);transform:scaleY(.7) rotate(8deg)}
+.fieldstat{font-family:var(--mono);font-size:.85rem;font-weight:700}
+
+/* mergers */
+.merge{margin-top:44px;display:grid;gap:18px}
+.mgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.co{border:3px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--surface);transition:all .5s cubic-bezier(.3,1.4,.5,1)}
+.co b{font-family:var(--display);font-weight:900;font-size:1.5rem;text-transform:uppercase;display:block;line-height:1}
+.co small{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.co.gone{opacity:.3;transform:scale(.9);background:transparent}
+.co.big{background:var(--red);color:var(--on-accent)}
+.co.big small{color:var(--on-accent)}
+
+/* label decoder */
+.decoder{display:grid;gap:18px;margin-top:44px}
+@media (min-width:860px){.decoder{grid-template-columns:1fr 1.2fr;align-items:start}}
+.labels{display:grid;gap:10px}
+.lab{all:unset;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;border:3px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--surface);font-weight:700}
+.lab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.lab:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
+.verdict{font-family:var(--display);font-weight:900;font-size:2rem;text-transform:uppercase;line-height:1}
+.panel{min-height:240px}
+
+/* eat clean */
+.grid3{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.hide-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.hide-list span{font-family:var(--mono);font-size:.78rem;border:2px solid var(--line);border-radius:8px;padding:3px 8px;background:var(--surface-2)}
+.card h3{margin-bottom:10px}
+.card ul{margin:0;padding-left:1.2em;display:grid;gap:6px}
+
+/* action */
+.actions{display:grid;gap:14px;counter-reset:a}
+.act{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;border-bottom:2px solid var(--line);padding-bottom:14px}
+.act::before{counter-increment:a;content:counter(a,decimal-leading-zero);font-family:var(--display);font-weight:900;font-size:2.4rem;line-height:.85;color:var(--green)}
+.news{display:grid;gap:12px;margin-top:30px;background:var(--ink);color:var(--bg);border-radius:var(--r);padding:24px}
+.news h3{color:var(--yellow)}
+.news form{display:flex;flex-wrap:wrap;gap:10px}
+.news input{flex:1 1 220px;min-width:0;font:inherit;padding:11px 14px;border:2.5px solid var(--bg);border-radius:10px;background:transparent;color:var(--bg)}
+.news input::placeholder{color:var(--bg);opacity:.6}
+.news .btn{box-shadow:none;border-color:var(--bg)}
+
+/* sources */
+.sources{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:s}
+.sources li{display:grid;grid-template-columns:3.2ch 1fr;gap:10px;font-size:.93rem;scroll-margin-top:130px}
+.sources li::before{counter-increment:s;content:counter(s);font-family:var(--mono);font-weight:700;color:var(--muted)}
+.sources li:target{background:var(--yellow);color:var(--on-accent);border-radius:6px}
+.sources li:target a{color:var(--on-accent)}
+
+/* brand + merch */
+.brand{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.tile{border:3px solid var(--line);border-radius:var(--r);padding:26px 20px;display:grid;place-items:center;min-height:180px;gap:10px;text-align:center}
+.tile .logo{font-size:4.2rem}
+.tile.dark{background:#11140F}
+.tile.dark .logo{color:#ECF1E3}.tile.dark .logo .w1{color:#FF5A4E}
+.tile.red{background:#DD2E28}
+.tile.red .logo,.tile.red .logo .w1{color:#11140F}
+.tile .cap{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile.dark .cap{color:#A3AC98}.tile.red .cap{color:#11140F}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:18px}
+.sw{border:3px solid var(--line);border-radius:12px;overflow:hidden;font-family:var(--mono);font-size:.72rem;font-weight:700}
+.sw div{height:64px}
+.sw p{padding:6px 8px;background:var(--surface)}
+.typespec{display:grid;gap:10px;margin-top:18px}
+.typespec div{border:2px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--surface);display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+
+.merch{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.item{border:3px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.mock{position:relative;aspect-ratio:1/1;background:var(--surface-2);display:grid;place-items:center;max-width:100%}
+.mock svg.garment{width:88%;height:88%;filter:drop-shadow(4px 6px 0 rgba(0,0,0,.18))}
+.mock .print{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);display:grid;place-items:center;text-align:center;width:44%}
+.print .logo{font-size:2.6rem}
+.print.light .logo{color:#ECF1E3}.print.light .logo .w1{color:#FF5A4E}
+.print.dark .logo{color:#11140F}.print.dark .logo .w1{color:#DD2E28}
+.slog{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.88;font-size:2rem}
+.item-info{padding:14px 16px;display:grid;gap:8px;border-top:3px solid var(--line)}
+.item-info b{font-family:var(--display);font-size:1.4rem;text-transform:uppercase;font-weight:900;line-height:1}
+.dots{display:flex;gap:8px}
+.dot{all:unset;cursor:pointer;width:24px;height:24px;border-radius:50%;border:2.5px solid var(--line)}
+.dot[aria-pressed="true"]{outline:3px solid var(--sky);outline-offset:2px}
+
+footer{border-top:3px solid var(--line);padding-block:40px 60px}
+footer .logo{font-size:3.4rem}
+.note{font-size:.88rem;color:var(--muted);max-width:70ch}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="omark" viewBox="0 0 100 100">
+      <circle cx="50" cy="52" r="37" fill="none" stroke="currentColor" stroke-width="14"/>
+      <path d="M40 28 C 62 38, 62 46, 40 56 C 18 66, 62 70, 58 78" fill="none" stroke="var(--green)" stroke-width="5" stroke-linecap="round"/>
+      <path d="M60 28 C 38 38, 38 46, 60 56 C 82 66, 38 70, 42 78" fill="none" stroke="var(--green)" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+      <line x1="25" y1="27" x2="75" y2="77" stroke="var(--red)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M76 22 C 80 6, 96 2, 99 2 C 99 16, 92 28, 76 22 Z" fill="var(--green)"/>
+    </symbol>
+    <symbol id="sprout" viewBox="0 0 40 40">
+      <path d="M20 38 V18" stroke="var(--green-ink)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M20 20 C 8 20, 4 10, 4 4 C 14 4, 20 10, 20 20Z" fill="var(--green)"/>
+      <path d="M20 16 C 30 16, 36 8, 36 2 C 26 2, 20 8, 20 16Z" fill="var(--green)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="logo main" href="#top" aria-label="FUCK GMOs home"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></a>
+    <a class="logo kidf" href="#top" aria-label="F GMOs home"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#kids">Kids</a><a href="#facts">Quick Facts</a><a href="#deep">Deep Dive</a><a href="#eat">Eat Clean</a><a href="#act">Take Action</a><a href="#merch">Merch</a><a href="#sources">Sources</a>
+    </nav>
+    <div class="level" role="radiogroup" aria-label="Reading level">
+      <button role="radio" aria-checked="false" data-l="kid">Kid</button>
+      <button role="radio" aria-checked="true" data-l="teen">Teen</button>
+      <button role="radio" aria-checked="false" data-l="expert">Expert</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="lv t e">
+        <h1 class="logo stacked" aria-label="FUCK GMOs"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></h1>
+      </div>
+      <div class="lv k">
+        <h1 class="logo stacked kidf" aria-label="F GMOs"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></h1>
+      </div>
+      <p class="hook lv t e">Know your seeds. <em>Eat real food.</em></p>
+      <p class="hook lv k" style="font-family:var(--kid);text-transform:none">Where does your food come from?</p>
+      <p class="lede lv k">Follow a tiny seed from the dirt to your dinner plate. Play games and find out what makes food healthy.</p>
+      <p class="lede lv t">Who owns the seeds, what gets sprayed on them, and what ends up on your plate. Fast facts with receipts.</p>
+      <p class="lede lv e">An evidence-graded look at genetically engineered crops and the farming system built around them: herbicide regimes, seed IP, monoculture, labeling, and diet. Every claim is sourced.</p>
+    </div>
+    <div class="doors">
+      <a class="door" href="#kids"><span class="ic" style="background:var(--green)"><svg width="34" height="34"><use href="#sprout"/></svg></span><div><b>Kids</b><span>Grow a seed, meet the soil, play the sorting game</span></div><span class="arr">→</span></a>
+      <a class="door" href="#facts"><span class="ic" style="background:var(--yellow)"><svg width="30" height="30" viewBox="0 0 30 30"><path d="M17 2 L6 17 H14 L12 28 L24 12 H16 Z" fill="#11140F"/></svg></span><div><b>Quick Facts</b><span>60-second cards. Tap to flip.</span></div><span class="arr">→</span></a>
+      <a class="door" href="#deep"><span class="ic" style="background:var(--red)"><svg width="32" height="32" viewBox="0 0 30 30"><circle cx="12" cy="12" r="8" fill="none" stroke="#11140F" stroke-width="3.5"/><path d="M18 18 L27 27" stroke="#11140F" stroke-width="4" stroke-linecap="round"/></svg></span><div><b>Deep Dive</b><span>Mechanisms, studies, data, citations</span></div><span class="arr">→</span></a>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true"><div>Know your seeds<i>✦</i>Eat real food<i>✦</i>Seeds belong to farmers<i>✦</i>Grow your own<i>✦</i>Read the label<i>✦</i>Support local farms<i>✦</i>Know your seeds<i>✦</i>Eat real food<i>✦</i>Seeds belong to farmers<i>✦</i>Grow your own<i>✦</i>Read the label<i>✦</i>Support local farms<i>✦</i></div></div>
+</section>
+
+<!-- KID MODE -->
+<section id="kids" class="kid">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kidtag">Kid Mode</span>
+      <h2>The amazing journey of a seed</h2>
+      <p class="lede">Scroll down and watch the seed grow.</p>
+    </div>
+    <div class="story">
+      <div class="stage">
+        <svg id="plant" viewBox="0 0 400 400" role="img" aria-label="A seed growing into a plant with a tomato">
+          <g class="sun"><circle cx="320" cy="70" r="30" fill="var(--yellow)" stroke="#11140F" stroke-width="3"/>
+            <g stroke="#11140F" stroke-width="3" stroke-linecap="round"><path d="M320 20v-10M320 130v-10M270 70h-10M380 70h-10M285 35l-7-7M362 112l-7-7M355 35l7-7M278 112l7-7"/></g></g>
+          <ellipse cx="90" cy="70" rx="44" ry="18" fill="#FBFCF7" stroke="#11140F" stroke-width="3"/>
+          <rect x="0" y="250" width="400" height="150" fill="var(--soil-2)"/>
+          <path class="grass" d="M0 250 Q100 238 200 250 T400 250 V262 H0Z" fill="var(--green)"/>
+          <g fill="#3E2614" opacity=".6"><circle cx="40" cy="300" r="4"/><circle cx="330" cy="350" r="5"/><circle cx="260" cy="290" r="3"/><circle cx="90" cy="370" r="4"/></g>
+          <path class="worm" d="M60 330 q10 -12 20 0 t20 0 t20 0" fill="none" stroke="#E79AA0" stroke-width="9" stroke-linecap="round"/>
+          <path class="rootline" pathLength="1" d="M200 262 C 196 300, 176 320, 160 350 M200 270 C 210 300, 232 320, 246 356 M200 262 L 202 330" fill="none" stroke="#E9D3A8" stroke-width="5" stroke-linecap="round"/>
+          <ellipse cx="200" cy="268" rx="14" ry="9" fill="#C99A5B" stroke="#11140F" stroke-width="3"/>
+          <path class="stem" pathLength="1" d="M200 260 C 196 210, 206 170, 200 110" fill="none" stroke="var(--green-ink)" stroke-width="9" stroke-linecap="round"/>
+          <path class="leaf l1" d="M198 200 C 150 205, 130 175, 128 160 C 160 155, 190 170, 198 200Z" fill="var(--green)" stroke="#11140F" stroke-width="3"/>
+          <path class="leaf l2" d="M202 165 C 250 170, 270 140, 272 125 C 240 120, 210 135, 202 165Z" fill="var(--green)" stroke="#11140F" stroke-width="3"/>
+          <g class="bloom"><circle cx="200" cy="100" r="26" fill="var(--red)" stroke="#11140F" stroke-width="3"/><path d="M188 78 l12 8 l12 -8 l-4 12 h-16z" fill="var(--green)" stroke="#11140F" stroke-width="2.5"/><ellipse cx="190" cy="94" rx="6" ry="4" fill="#FFFFFF" opacity=".6"/></g>
+        </svg>
+      </div>
+      <div class="steps" id="steps">
+        <div class="step"><b><span class="n">1</span>A seed takes a nap</b>Every seed holds a baby plant and a packed lunch. It waits in the dirt until the time is right.</div>
+        <div class="step"><b><span class="n">2</span>Rain and sun wake it up</b>Water soaks in. The seed cracks open and a tiny root pushes down while a shoot reaches up.</div>
+        <div class="step"><b><span class="n">3</span>Roots make friends</b>Worms dig tunnels. Tiny helpers called microbes trade food with the roots. Healthy dirt is full of life.</div>
+        <div class="step"><b><span class="n">4</span>Leaves catch sunshine</b>Leaves turn sunlight, air, and water into plant food. Scientists call this photosynthesis.</div>
+        <div class="step"><b><span class="n">5</span>Food for you</b>The plant makes fruit full of seeds. You eat the fruit, save the seeds, and plant them again next year.</div>
+      </div>
+    </div>
+
+    <div class="soil-wrap">
+      <div class="soilbox" id="soilbox">
+        <svg viewBox="0 0 400 240" role="img" aria-label="A slice of soil with worms, roots and microbes">
+          <rect width="400" height="60" fill="var(--sky)"/>
+          <path class="grass" d="M0 60 Q100 50 200 60 T400 60 V70 H0Z" fill="var(--green)"/>
+          <g class="drift" fill="#D9E36B"><circle cx="40" cy="10" r="3"/><circle cx="120" cy="0" r="4"/><circle cx="200" cy="14" r="3"/><circle cx="280" cy="4" r="4"/><circle cx="350" cy="12" r="3"/><circle cx="80" cy="20" r="3"/><circle cx="240" cy="22" r="3"/><circle cx="320" cy="24" r="4"/></g>
+          <g class="alive">
+            <path d="M120 70 C 116 110, 100 140, 90 190 M120 70 C 130 120, 150 150, 160 200 M300 70 C 296 120, 280 160, 300 220" fill="none" stroke="#E9D3A8" stroke-width="4" stroke-linecap="round"/>
+            <path class="worm" d="M200 150 q10 -12 20 0 t20 0 t20 0" fill="none" stroke="#E79AA0" stroke-width="8" stroke-linecap="round"/>
+            <path class="worm" style="animation-delay:-1.4s" d="M40 210 q10 -12 20 0 t20 0" fill="none" stroke="#E79AA0" stroke-width="8" stroke-linecap="round"/>
+            <g fill="var(--yellow)" stroke="#11140F" stroke-width="1.5">
+              <circle class="microbe" cx="60" cy="110" r="5"/><circle class="microbe" cx="170" cy="100" r="4"/><circle class="microbe" cx="250" cy="200" r="5"/><circle class="microbe" cx="340" cy="120" r="4"/><circle class="microbe" cx="150" cy="190" r="4"/><circle class="microbe" cx="370" cy="200" r="5"/><circle class="microbe" cx="220" cy="90" r="3"/><circle class="microbe" cx="100" cy="150" r="4"/>
+            </g>
+            <path d="M330 170 l8 -6 l8 6 l-8 6z" fill="#B3E6FF" stroke="#11140F" stroke-width="1.5" class="microbe"/>
+          </g>
+        </svg>
+      </div>
+      <div class="stack">
+        <h3>Healthy dirt vs. sick dirt</h3>
+        <div class="row" role="group" aria-label="Soil type">
+          <button class="btn green" id="soilHealthy" aria-pressed="true">Healthy soil</button>
+          <button class="btn ghost" id="soilToxic" aria-pressed="false">Sprayed soil</button>
+        </div>
+        <p id="soilText">Healthy soil is alive. A single teaspoon can hold 100 million to 1 billion bacteria, plus worms and fungi that feed the plant. <a class="src" href="#s17">NRCS</a></p>
+      </div>
+    </div>
+
+    <div class="game" id="game">
+      <h3>Sorting game: which crops are usually GMO in the U.S.?</h3>
+      <p class="muted" style="margin-top:6px">Tap a food, then tap the box it belongs in.</p>
+      <div class="tray" id="tray" aria-label="Foods to sort"></div>
+      <div class="bins">
+        <button class="bin" data-bin="ge"><b>Usually GMO</b><span class="got"></span></button>
+        <button class="bin" data-bin="non"><b>Almost never GMO</b><span class="got"></span></button>
+      </div>
+      <p class="gamemsg" id="gamemsg" aria-live="polite" style="margin-top:12px"></p>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK FACTS -->
+<section id="facts">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Quick Facts · tap a card to flip it</span>
+      <h2>60 seconds. Receipts included.</h2>
+      <p class="lede">Each card carries an evidence grade. <span class="badge b-strong">Strong</span> means scientists broadly agree. <span class="badge b-mixed">Mixed</span> means studies point different ways. <span class="badge b-debated">Debated</span> means expert bodies disagree.</p>
+    </div>
+    <div class="facts" id="factgrid"></div>
+  </div>
+</section>
+
+<!-- DEEP DIVE -->
+<section id="deep">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Deep Dive</span>
+      <h2>Go as deep as you want</h2>
+      <p class="lede">Plain summary on top. Open the layers for the mechanism, the evidence, and the citations. Expert mode opens everything.</p>
+    </div>
+
+    <!-- DNA zoom -->
+    <div class="dna">
+      <div class="zoombox" id="zoombox">
+        <svg viewBox="0 0 400 300" class="on" data-z="0" role="img" aria-label="A corn plant">
+          <rect y="230" width="400" height="70" fill="var(--soil-2)"/>
+          <path d="M200 232 C 196 160, 206 110, 200 30" fill="none" stroke="var(--green-ink)" stroke-width="10" stroke-linecap="round"/>
+          <path d="M200 190 C 140 170, 100 190, 70 215 C 120 205, 170 200, 200 196Z" fill="var(--green)" stroke="#11140F" stroke-width="3"/>
+          <path d="M200 150 C 260 130, 300 150, 330 175 C 280 165, 230 160, 200 156Z" fill="var(--green)" stroke="#11140F" stroke-width="3"/>
+          <path d="M200 105 C 150 85, 120 100, 95 120 C 135 112, 175 110, 200 111Z" fill="var(--green)" stroke="#11140F" stroke-width="3"/>
+          <rect x="206" y="100" width="22" height="64" rx="11" fill="var(--yellow)" stroke="#11140F" stroke-width="3"/>
+          <path d="M200 30 l-14 -18 M200 30 l0 -22 M200 30 l14 -18" stroke="var(--clay)" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="285" cy="160" r="26" fill="none" stroke="var(--red)" stroke-width="4" stroke-dasharray="7 6"/>
+        </svg>
+        <svg viewBox="0 0 400 300" data-z="1" role="img" aria-label="A plant cell with a nucleus">
+          <rect x="40" y="30" width="320" height="240" rx="30" fill="#D9F2C9" stroke="var(--green-ink)" stroke-width="8"/>
+          <g fill="var(--green)" stroke="#11140F" stroke-width="2.5"><ellipse cx="100" cy="80" rx="26" ry="13"/><ellipse cx="300" cy="230" rx="26" ry="13"/><ellipse cx="110" cy="220" rx="22" ry="11"/><ellipse cx="300" cy="80" rx="22" ry="11"/></g>
+          <rect x="150" y="70" width="100" height="40" rx="18" fill="#B9E3F5" stroke="#11140F" stroke-width="2.5"/>
+          <circle cx="210" cy="170" r="52" fill="#F4C6A1" stroke="#11140F" stroke-width="3"/>
+          <circle cx="222" cy="160" r="14" fill="var(--clay)"/>
+          <circle cx="210" cy="170" r="66" fill="none" stroke="var(--red)" stroke-width="4" stroke-dasharray="7 6"/>
+        </svg>
+        <svg viewBox="0 0 400 300" data-z="2" role="img" aria-label="A DNA strand with an inserted gene highlighted">
+          <defs><clipPath id="clipdna"><rect x="20" y="40" width="360" height="220"/></clipPath></defs>
+          <g clip-path="url(#clipdna)"><g class="helix-spin" id="helix"></g></g>
+          <rect x="160" y="70" width="80" height="160" rx="14" fill="none" stroke="var(--red)" stroke-width="4" stroke-dasharray="7 6"/>
+          <text x="200" y="258" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" fill="var(--red)">INSERTED GENE</text>
+        </svg>
+      </div>
+      <div class="stack">
+        <span class="eyebrow">How a GMO is made</span>
+        <h3 id="zoomTitle">1. The plant</h3>
+        <div class="zoomtabs" role="tablist" aria-label="Zoom level">
+          <button class="btn" role="tab" aria-pressed="true" data-z="0">Plant</button>
+          <button class="btn ghost" role="tab" aria-pressed="false" data-z="1">Cell</button>
+          <button class="btn ghost" role="tab" aria-pressed="false" data-z="2">Gene</button>
+        </div>
+        <div id="zoomText"></div>
+      </div>
+    </div>
+
+    <div class="topics" id="topics" style="margin-top:56px"></div>
+
+    <!-- Monoculture -->
+    <div class="field-wrap">
+      <div class="fieldbox"><svg id="field" viewBox="0 0 360 230" role="img" aria-label="A field of crops"></svg></div>
+      <div class="stack">
+        <span class="eyebrow">Interactive · monoculture vs. diversity</span>
+        <h3>One crop, one weakness</h3>
+        <div class="row">
+          <button class="btn" id="fMono" aria-pressed="true">One crop</button>
+          <button class="btn ghost" id="fDiv" aria-pressed="false">Mixed crops</button>
+          <button class="btn green" id="fPest">Release a pest</button>
+        </div>
+        <p class="fieldstat" id="fieldstat" aria-live="polite">Release the pest to see how far it spreads.</p>
+        <p class="lv k">When a whole field is the same plant, one bug can eat all of it. When lots of different plants grow together, the bug gets stuck.</p>
+        <p class="lv t e">Uniform fields let one pest or disease run wall to wall. In 1970, Southern corn leaf blight wiped out about 15% of the U.S. corn crop because most hybrids shared the same vulnerable trait. <a class="src" href="#s14">Ullstrup 1972</a></p>
+        <p class="lv e muted">Simulation: the pest spreads to adjacent plants of the same species only. A teaching model, not an epidemiological one.</p>
+      </div>
+    </div>
+
+    <!-- Seed company mergers -->
+    <div class="merge">
+      <div class="stack">
+        <span class="eyebrow">Interactive · who owns the seeds</span>
+        <h3>Six giants became four</h3>
+        <p class="lede lv k">A few very big companies own most of the seeds farmers buy. That means fewer choices.</p>
+        <p class="lede lv t e">Between 2015 and 2019, a wave of mergers folded the "Big Six" seed and chemical firms into four. Several of them sell both the herbicide-tolerant seed and the herbicide. <a class="src" href="#s6">IPES-Food</a></p>
+        <div class="row"><button class="btn" id="mergeBtn" aria-pressed="false">Run the mergers</button></div>
+      </div>
+      <div class="mgrid" id="mgrid"></div>
+    </div>
+
+    <!-- Label decoder -->
+    <div class="decoder">
+      <div class="stack">
+        <span class="eyebrow">Interactive · label decoder</span>
+        <h3>What does the label actually mean?</h3>
+        <div class="labels" role="tablist" aria-label="Food labels" id="labels"></div>
+      </div>
+      <div class="card panel" id="labpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EAT CLEAN -->
+<section id="eat">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Eat Clean</span>
+      <h2>Real food, step by step</h2>
+      <p class="lede">You don't have to be perfect. Start with whole foods and work out from there.</p>
+    </div>
+    <div class="grid3">
+      <div class="card"><h3>Shop smart</h3>
+        <ul><li>Buy whole fruits and vegetables. Very few fresh items in U.S. stores are genetically engineered.</li><li>Choose <b>USDA Organic</b> for corn, soy, canola, and sugar products. Organic rules ban genetic engineering. <a class="src" href="#s21">USDA NOP</a></li><li>Cut back on ultra-processed snacks and drinks.</li></ul>
+        <p style="margin-top:14px;font-weight:700">Where GE crops hide in packaged food:</p>
+        <div class="hide-list"><span>corn syrup</span><span>cornstarch</span><span>soybean oil</span><span>soy lecithin</span><span>canola oil</span><span>cottonseed oil</span><span>sugar (beet)</span><span>maltodextrin</span></div>
+      </div>
+      <div class="card"><h3>Find local farms</h3>
+        <ul><li>Ask growers how they farm. Most will tell you.</li><li><a href="https://www.usdalocalfoodportal.com/" target="_blank" rel="noopener">USDA Local Food Directories</a> lists farmers markets, CSAs, and on-farm stores.</li><li><a href="https://www.localharvest.org/" target="_blank" rel="noopener">LocalHarvest</a> maps small farms and CSAs.</li><li>In Kansas City, start at City Market in the River Market.</li></ul></div>
+      <div class="card"><h3>Save seeds</h3>
+        <ul><li>Grow <b>open-pollinated</b> or <b>heirloom</b> varieties. Their seeds grow true to type next year.</li><li>Hybrid (F1) seeds won't reliably repeat, and patented seeds can't legally be replanted. <a class="src" href="#s5">Bowman v. Monsanto</a></li><li><a href="https://www.seedsavers.org/" target="_blank" rel="noopener">Seed Savers Exchange</a> preserves and shares heirloom seed.</li></ul></div>
+      <div class="card"><h3>Grow your own</h3>
+        <ul><li>Start small: herbs, lettuce, radishes, and bush beans grow fast in pots.</li><li>Feed the soil with compost. Living soil grows stronger plants.</li><li>Plant mixed beds instead of single rows. Diversity confuses pests.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- TAKE ACTION -->
+<section id="act">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Take Action</span>
+      <h2>Do something this week</h2>
+    </div>
+    <div class="actions">
+      <div class="act"><div><h3>Spend $10 at a farmers market</h3><p class="muted">Money that goes straight to a grower keeps diverse farms in business.</p></div></div>
+      <div class="act"><div><h3>Read one label out loud</h3><p class="muted">Check a box of cereal or a bottle of oil for the "bioengineered" disclosure or a QR code. Show someone what you found.</p></div></div>
+      <div class="act"><div><h3>Comment on a federal rule</h3><p class="muted">The EPA and USDA take public comments on pesticide and labeling rules at <a href="https://www.regulations.gov/" target="_blank" rel="noopener">regulations.gov</a>. Search "glyphosate" or "bioengineered."</p></div></div>
+      <div class="act"><div><h3>Plant one thing</h3><p class="muted">A pot of basil counts. Save its seeds at the end of the season.</p></div></div>
+      <div class="act"><div><h3>Share a card</h3><p class="muted">Send a Quick Fact to a friend. Keep the source link attached.</p></div></div>
+    </div>
+    <div class="news">
+      <h3>Get one fact a week</h3>
+      <p>A short email with one sourced fact and one thing to do about it.</p>
+      <form id="newsform"><label for="email" class="eyebrow" style="flex-basis:100%;color:var(--bg)">Email address</label><input id="email" type="email" required placeholder="you@example.com" autocomplete="email"><button class="btn" type="submit">Sign up</button></form>
+      <p id="newsmsg" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND -->
+<section id="brand">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Brand kit</span>
+      <h2>The mark</h2>
+      <p class="lede">The O is the logo: a crossed-out DNA strand inside a ring, with a leaf breaking out of it. It works on its own as an icon, a patch, or a hat.</p>
+    </div>
+    <div class="brand">
+      <div class="tile" style="background:var(--surface)"><span class="logo stacked"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span><span class="cap">Primary · light</span></div>
+      <div class="tile dark"><span class="logo stacked"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span><span class="cap">Primary · dark</span></div>
+      <div class="tile red"><span class="logo"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span><span class="cap">One line · red</span></div>
+      <div class="tile" style="background:var(--surface)"><svg style="width:110px;height:110px;color:var(--ink)"><use href="#omark"/></svg><span class="cap">Icon mark</span></div>
+      <div class="tile" style="background:var(--surface-2)"><span class="logo"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span><span class="cap">Kid-safe · Kid Mode</span></div>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div style="background:#11140F"></div><p>Soil Black<br>#11140F</p></div>
+      <div class="sw"><div style="background:#EDF1E4"></div><p>Field Paper<br>#EDF1E4</p></div>
+      <div class="sw"><div style="background:#DD2E28"></div><p>Tomato Red<br>#DD2E28</p></div>
+      <div class="sw"><div style="background:#169A44"></div><p>Seed Green<br>#169A44</p></div>
+      <div class="sw"><div style="background:#FFC531"></div><p>Sun Yellow<br>#FFC531</p></div>
+      <div class="sw"><div style="background:#B45E2B"></div><p>Clay<br>#B45E2B</p></div>
+      <div class="sw"><div style="background:#3FA6D6"></div><p>Sky<br>#3FA6D6</p></div>
+    </div>
+    <div class="typespec">
+      <div><span style="font-family:var(--display);font-weight:900;font-size:1.8rem;text-transform:uppercase">Big Shoulders Display</span><span class="eyebrow">Headlines · logo</span></div>
+      <div><span style="font-size:1.2rem;font-weight:700">Atkinson Hyperlegible</span><span class="eyebrow">Body text</span></div>
+      <div><span style="font-family:var(--kid);font-weight:600;font-size:1.3rem">Fredoka</span><span class="eyebrow">Kid Mode</span></div>
+      <div><span style="font-family:var(--mono);font-weight:700">JetBrains Mono</span><span class="eyebrow">Data · labels</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section id="merch">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Merch · first drop concepts</span>
+      <h2>Wear the message</h2>
+      <p class="lede">Tap the color dots to try each garment. Print-ready files come next.</p>
+    </div>
+    <div class="merch" id="merchgrid"></div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section id="sources">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Sources</span>
+      <h2>The receipts</h2>
+      <p class="lede">Every chip on this site points here. Research current through mid-2026. Recheck figures before launch.</p>
+    </div>
+    <ol class="sources" id="srclist"></ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap stack">
+    <span class="logo"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span>
+    <p class="note">Strong opinions about the food system. Careful about the facts. This site is for education and does not give medical advice.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- SOURCES ---------- */
+const SRC=[
+ ['s1','National Academies of Sciences, Engineering, and Medicine (2016). Genetically Engineered Crops: Experiences and Prospects.','https://doi.org/10.17226/23395'],
+ ['s2','USDA Economic Research Service. Adoption of Genetically Engineered Crops in the United States (data series).','https://www.ers.usda.gov/data-products/adoption-of-genetically-engineered-crops-in-the-united-states'],
+ ['s3','Heap, I. International Herbicide-Resistant Weed Database.','https://www.weedscience.org/'],
+ ['s4','Benbrook, C. (2016). Trends in glyphosate herbicide use in the United States and globally. Environmental Sciences Europe 28:3.','https://doi.org/10.1186/s12302-016-0070-0'],
+ ['s5','Bowman v. Monsanto Co., 569 U.S. 278 (2013). U.S. Supreme Court.','https://supreme.justia.com/cases/federal/us/569/278/'],
+ ['s6','IPES-Food (2017). Too Big to Feed: Exploring the impacts of mega-mergers, consolidation and concentration of power in the agri-food sector.','https://www.ipes-food.org/'],
+ ['s7','Guyton, K. et al. (2015). Carcinogenicity of tetrachlorvinphos, parathion, malathion, diazinon, and glyphosate. The Lancet Oncology 16(5). (IARC Monograph 112 summary)','https://doi.org/10.1016/S1470-2045(15)70134-8'],
+ ['s8','U.S. EPA. Glyphosate: registration review and human health assessment.','https://www.epa.gov/ingredients-used-pesticide-products/glyphosate'],
+ ['s9','EFSA (2023). Peer review of the pesticide risk assessment of the active substance glyphosate. EFSA Journal 21(7):8164.','https://doi.org/10.2903/j.efsa.2023.8164'],
+ ['s10','Hall, K. et al. (2019). Ultra-processed diets cause excess calorie intake and weight gain. Cell Metabolism 30(1).','https://doi.org/10.1016/j.cmet.2019.05.008'],
+ ['s11','Lane, M. et al. (2024). Ultra-processed food exposure and adverse health outcomes: umbrella review. BMJ 384:e077310.','https://doi.org/10.1136/bmj-2023-077310'],
+ ['s12','Pleasants, J. & Oberhauser, K. (2013). Milkweed loss in agricultural fields because of herbicide use. Insect Conservation and Diversity 6(2).','https://doi.org/10.1111/j.1752-4598.2012.00196.x'],
+ ['s13','FAO (2019). The State of the World’s Biodiversity for Food and Agriculture.','https://www.fao.org/3/CA3129EN/CA3129EN.pdf'],
+ ['s14','Ullstrup, A. J. (1972). The impacts of the southern corn leaf blight epidemics of 1970–1971. Annual Review of Phytopathology 10.','https://doi.org/10.1146/annurev.py.10.090172.000101'],
+ ['s15','USDA Agricultural Marketing Service. National Bioengineered Food Disclosure Standard.','https://www.ams.usda.gov/rules-regulations/be'],
+ ['s16','World Health Organization. Food, genetically modified: Q&A.','https://www.who.int/news-room/questions-and-answers/item/food-genetically-modified'],
+ ['s17','USDA Natural Resources Conservation Service. Soil health and soil biology.','https://www.nrcs.usda.gov/conservation-basics/natural-resource-concerns/soil/soil-health'],
+ ['s18','U.S. EPA. Registration of dicamba for use on dicamba-tolerant crops.','https://www.epa.gov/pesticides/registration-dicamba-use-dicamba-tolerant-crops'],
+ ['s19','Doebley, J. (2004). The genetics of maize evolution. Annual Review of Genetics 38.','https://doi.org/10.1146/annurev.genet.37.110801.143356'],
+ ['s20','Ospina, M. et al. (2022). Exposure to glyphosate in the United States: NHANES 2013–2014. Environmental Research.','https://pubmed.ncbi.nlm.nih.gov/?term=Ospina+glyphosate+NHANES+2013-2014'],
+ ['s21','USDA National Organic Program. Organic standards (excluded methods).','https://www.ams.usda.gov/about-ams/programs-offices/national-organic-program'],
+ ['s22','Non-GMO Project. Product verification standard.','https://www.nongmoproject.org/'],
+ ['s23','U.S. FDA. Use of the term "natural" on food labeling.','https://www.fda.gov/food/food-labeling-nutrition/use-term-natural-food-labeling']
+];
+const SNAME={};
+$('#srclist').innerHTML=SRC.map(([id,t,u])=>{SNAME[id]=t.split('(')[0].split('.')[0].trim();return `<li id="${id}"><span>${t} <a href="${u}" target="_blank" rel="noopener">Link</a></span></li>`}).join('');
+const chip=(id,label)=>`<a class="src" href="#${id}">${label}</a>`;
+
+/* ---------- LEVEL ---------- */
+function setLevel(l){
+  document.body.dataset.level=l;
+  $$('.level button').forEach(b=>b.setAttribute('aria-checked',b.dataset.l===l));
+  $$('#topics details').forEach(d=>d.open=(l==='expert'));
+  renderZoom();
+  try{localStorage.setItem('fg-level',l)}catch(e){}
+}
+$$('.level button').forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.l)));
+$('.level').addEventListener('keydown',e=>{
+  if(!['ArrowLeft','ArrowRight'].includes(e.key))return;
+  const bs=$$('.level button'),i=bs.findIndex(b=>b.getAttribute('aria-checked')==='true');
+  const n=bs[(i+(e.key==='ArrowRight'?1:bs.length-1))%bs.length];n.focus();setLevel(n.dataset.l);
+});
+
+/* ---------- SEED GROW ON SCROLL ---------- */
+const plant=$('#plant'),stage=$('.stage'),steps=$('#steps');
+function grow(){
+  const r=steps.getBoundingClientRect(),vh=innerHeight;
+  let p=(vh*0.75-r.top)/(r.height);
+  p=Math.max(0.04,Math.min(1,p));
+  plant.style.setProperty('--g',p.toFixed(3));
+}
+if(!reduce){addEventListener('scroll',grow,{passive:true});addEventListener('resize',grow);grow();}
+
+/* ---------- SOIL ---------- */
+const soilT={
+ h:`Healthy soil is alive. A single teaspoon can hold 100 million to 1 billion bacteria, plus worms and fungi that feed the plant. ${chip('s17','NRCS')}`,
+ t:`When weed killer drifts on the wind it can hurt plants it was never meant for. Drift from the weed killer dicamba damaged soybean fields across the Midwest, and courts pulled its spray-over-the-top approval in 2020 and 2024. How glyphosate affects soil microbes is still being studied. <span class="badge b-mixed">Mixed</span> ${chip('s18','EPA')}`
+};
+function soil(t){$('#soilbox').classList.toggle('toxic',t);$('#soilHealthy').setAttribute('aria-pressed',!t);$('#soilToxic').setAttribute('aria-pressed',t);
+ $('#soilHealthy').className='btn '+(t?'ghost':'green');$('#soilToxic').className='btn '+(t?'':'ghost');$('#soilText').innerHTML=t?soilT.t:soilT.h;
+ $$('#plant .grass').forEach(()=>{});}
+$('#soilHealthy').onclick=()=>soil(false);$('#soilToxic').onclick=()=>soil(true);
+
+/* ---------- SORT GAME ---------- */
+const FOODS=[['Field corn','ge'],['Soybeans','ge'],['Sugar beets','ge'],['Canola','ge'],['Cotton','ge'],['Strawberries','non'],['Carrots','non'],['Blueberries','non'],['Broccoli','non'],['Oats','non']];
+let picked=null,score=0,done=0;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startGame(){
+  score=0;done=0;picked=null;$$('.bin .got').forEach(g=>g.innerHTML='');$('#gamemsg').textContent='';
+  $('#tray').innerHTML=shuffle(FOODS.slice()).map(([n,k])=>`<button class="food" data-k="${k}" aria-pressed="false">${n}</button>`).join('');
+}
+$('#tray').addEventListener('click',e=>{const f=e.target.closest('.food');if(!f)return;$$('.food').forEach(x=>x.setAttribute('aria-pressed','false'));f.setAttribute('aria-pressed','true');picked=f;});
+$$('.bin').forEach(b=>b.addEventListener('click',()=>{
+  if(!picked){$('#gamemsg').textContent='Pick a food first!';return}
+  const ok=picked.dataset.k===b.dataset.bin;
+  b.querySelector('.got').insertAdjacentHTML('beforeend',`<span class="${ok?'ok':'no'}">${picked.textContent} ${ok?'✓':'✗'}</span>`);
+  if(ok)score++;done++;picked.remove();picked=null;
+  if(done===FOODS.length){$('#gamemsg').innerHTML=`You got ${score} out of ${FOODS.length}! Most GMO crops in the U.S. are corn, soy, sugar beets, canola, and cotton. They end up in packaged food, oils, and animal feed. <button class="btn ghost" id="again" style="margin-left:8px">Play again</button>`;$('#again').onclick=startGame;}
+  else $('#gamemsg').textContent=ok?'Nice one!':'Not quite. Keep going!';
+}));
+startGame();
+
+/* ---------- FACT CARDS ---------- */
+const FACTS=[
+ {big:'90%+',f:'of U.S. corn, soy and cotton acres are genetically engineered',fk:'Almost all corn and soybeans grown in the U.S. are GMO',g:'strong',
+  k:'Nine out of ten corn and soybean fields grow GMO seeds. Most of that corn feeds animals or becomes syrup and oil.',
+  t:'Herbicide-tolerant and insect-resistant varieties dominate. Most of the harvest goes to animal feed, ethanol, oils, and sweeteners rather than straight to your plate.',
+  e:'USDA ERS survey data: HT and Bt adoption has held above 90% of planted acres for soybeans, cotton, and corn for roughly a decade.',s:['s2','USDA ERS']},
+ {big:'50+',f:'weed species have evolved resistance to glyphosate',fk:'Some weeds learned to survive weed killer',g:'strong',
+  k:'Farmers sprayed the same weed killer so often that some weeds stopped dying. Now they need stronger sprays.',
+  t:'Spraying one chemical year after year on Roundup Ready crops selected for "superweeds." Farmers responded by adding older, harsher herbicides like dicamba and 2,4-D.',
+  e:'Heap’s database lists 50+ glyphosate-resistant species worldwide, including Palmer amaranth and waterhemp. The NAS 2016 report flags resistance as a major agronomic problem tied to HT crops.',s:['s3','Heap']},
+ {big:'15×',f:'rise in global glyphosate use after Roundup Ready crops arrived',fk:'Weed killer use went way up',g:'strong',
+  k:'After special GMO seeds came out, farmers started spraying about 15 times more of one weed killer around the world.',
+  t:'Glyphosate became the most-used herbicide in history. Its use climbed about fifteen-fold worldwide between 1996 and 2014.',
+  e:'Benbrook (2016) estimates ~15-fold global growth 1996–2014, with GE herbicide-tolerant crops the main driver. CDC NHANES 2013–14 detected glyphosate in about 80% of urine samples tested.',s:['s4','Benbrook 2016']},
+ {big:'NO',f:'replanting. Patented seed can’t be saved and replanted.',fk:'Some farmers aren’t allowed to save their seeds',g:'strong',
+  k:'Farmers have saved seeds for thousands of years. With some GMO seeds, that’s against the rules.',
+  t:'The Supreme Court ruled in 2013 that a farmer who replanted patented soybeans infringed the patent. Farmers buy new seed every season.',
+  e:'Bowman v. Monsanto (2013): patent exhaustion does not permit reproduction of a patented seed through planting and harvesting. Licensing agreements also bar saving.',s:['s5','Bowman v. Monsanto']},
+ {big:'6→4',f:'seed giants merged between 2015 and 2019',fk:'A few big companies own most seeds',g:'strong',
+  k:'Six big seed companies joined together into four even bigger ones.',
+  t:'Bayer bought Monsanto, Dow and DuPont merged (their farm arm is now Corteva), and ChemChina bought Syngenta. BASF picked up the pieces Bayer had to sell.',
+  e:'IPES-Food (2017) warned the merged firms would control roughly 60% of the global commercial seed market and about 70% of agrochemicals.',s:['s6','IPES-Food']},
+ {big:'?!',f:'Glyphosate and cancer: the experts disagree',fk:'Grown-ups still argue about one weed killer',g:'debated',
+  k:'One group of scientists says a weed killer might cause cancer. Other groups say it probably doesn’t. They’re still arguing.',
+  t:'The WHO’s cancer agency (IARC) called glyphosate "probably carcinogenic" in 2015. The U.S. EPA and Europe’s EFSA concluded it’s not likely to cause cancer at normal exposures.',
+  e:'IARC Group 2A (2015), weighted on limited human evidence for non-Hodgkin lymphoma. EFSA 2023 found no critical areas of concern; the EU renewed approval to 2033. A 2022 Ninth Circuit ruling sent EPA’s human-health finding back for more work.',s:['s7','IARC']},
+ {big:'SAFE?',f:'Is eating approved GMO food poisonous?',fk:'Will eating GMO corn make you sick right away?',g:'strong',
+  k:'Scientists checked lots of studies and didn’t find that GMO food makes people sick. The bigger problems are the sprays and how the farms work.',
+  t:'Major science bodies found no evidence that approved GM foods are less safe to eat than regular ones. The stronger case against the system is the spraying, the patents, and the monocultures.',
+  e:'NAS (2016) and WHO found no substantiated difference in human health risk between approved GE and conventional foods, while noting each new trait needs case-by-case assessment and long-term monitoring.',s:['s1','NAS 2016']},
+ {big:'+500',f:'extra calories a day on an ultra-processed diet',fk:'Junk food makes you want to eat more',g:'strong',
+  k:'When people ate packaged junk food, they ate a lot more without noticing. Real food fills you up.',
+  t:'In a controlled NIH study, people ate about 500 more calories a day on ultra-processed food than on whole food, and gained weight.',
+  e:'Hall et al. (2019): inpatient randomized crossover, n=20, ~508 kcal/day difference. Lane et al. (2024) BMJ umbrella review linked UPF exposure to 32 adverse health outcomes.',s:['s10','Hall 2019']},
+ {big:'↓',f:'Milkweed loss in sprayed fields hit monarch butterflies',fk:'Butterflies lost their favorite plant',g:'mixed',
+  k:'Monarch butterflies need milkweed plants. Heavy spraying killed a lot of milkweed in farm fields.',
+  t:'Glyphosate on herbicide-tolerant crops wiped out much of the milkweed that once grew in Midwest farm fields, where monarchs laid many of their eggs.',
+  e:'Pleasants & Oberhauser (2013) estimated a 58% decline in Midwest milkweed, mostly in ag fields. How much this drives the monarch decline vs. migration-route factors is still debated.',s:['s12','Pleasants 2013']},
+ {big:'9,000',f:'years of humans changing corn by breeding',fk:'People changed plants long ago too',g:'strong',
+  k:'Long ago, corn was a skinny wild grass. Farmers picked the best plants again and again until it became the corn we eat.',
+  t:'Almost every crop has been changed by people. Corn came from a wild grass called teosinte. The difference with GMOs is that genes are moved in a lab, often from other species.',
+  e:'Maize was domesticated from teosinte in southern Mexico ~9,000 years ago (Doebley 2004). Breeding shuffles existing genes; transgenesis inserts DNA across species barriers.',s:['s19','Doebley 2004']}
+];
+$('#factgrid').innerHTML=FACTS.map((c,i)=>`<div class="fact" tabindex="0" role="button" aria-label="Fact card: ${c.f}. Press to flip.">
+ <div class="fact-in"><div class="face front"><span class="big">${c.big}</span><p class="lv t e">${c.f}</p><p class="lv k">${c.fk}</p><span class="tap">Tap to flip ↻</span></div>
+ <div class="face back"><p class="lv k">${c.k}</p><p class="lv t">${c.t}</p><p class="lv e">${c.e}</p>
+ <div class="foot"><span class="badge b-${c.g}">${c.g}</span>${chip(c.s[0],c.s[1])}</div></div></div></div>`).join('');
+$$('.fact').forEach(f=>{const t=()=>f.classList.toggle('flip');f.addEventListener('click',e=>{if(e.target.closest('a'))return;t()});f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
+
+/* ---------- DNA ZOOM ---------- */
+const helix=$('#helix');let hs='';
+for(let x=0;x<=520;x+=6){const y1=150+60*Math.sin(x/26),y2=150-60*Math.sin(x/26);
+ if(x%18===0){const ins=(x>=180&&x<=230)||(x>=260&&x<=310)||(x>=340&&x<=390)||(x>=100&&x<=150);hs+=`<line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}" stroke="${ins&&x%54<30?'var(--red)':'var(--muted)'}" stroke-width="4"/>`;}}
+let p1='',p2='';for(let x=0;x<=520;x+=4){p1+=(x?'L':'M')+x+' '+(150+60*Math.sin(x/26)).toFixed(1);p2+=(x?'L':'M')+x+' '+(150-60*Math.sin(x/26)).toFixed(1)}
+helix.innerHTML=hs+`<path d="${p1}" fill="none" stroke="var(--green-ink)" stroke-width="7"/><path d="${p2}" fill="none" stroke="var(--sky)" stroke-width="7"/>`;
+const ZOOM=[
+ {t:'1. The plant',k:'This is a corn plant. Let’s zoom into one leaf to see what it’s made of.',
+  te:'A GMO starts as a normal crop like corn. Scientists want to give it a new trait, such as surviving weed killer or killing insects that eat it.',
+  e:'Commercial GE traits are dominated by two families: herbicide tolerance (HT) and insect resistance (Bt). Stacked varieties carry both.'},
+ {t:'2. The cell',k:'Plants are made of tiny building blocks called cells. Each cell has a control center called the nucleus.',
+  te:'Every plant cell carries a full copy of the plant’s DNA in its nucleus. To make a GMO, scientists get new DNA into that nucleus.',
+  e:'Delivery is usually Agrobacterium tumefaciens-mediated transformation or biolistics (gene gun). Transformed cells are selected and regenerated into whole plants through tissue culture.'},
+ {t:'3. The gene',k:'DNA is like a recipe book. Scientists add a new recipe from a different living thing so the plant does something new.',
+  te:'A gene from a bacterium is added. Bt corn makes its own insect poison. Roundup Ready crops carry a gene that lets them survive glyphosate spray.',
+  e:'Examples: cry1Ab from Bacillus thuringiensis (Bt toxin); CP4 EPSPS from Agrobacterium sp. strain CP4, a glyphosate-insensitive enzyme. Newer CRISPR edits can change native genes without adding foreign DNA, which regulators treat differently.'}
+];
+let z=0;
+function renderZoom(){
+  const l=document.body.dataset.level||'teen',d=ZOOM[z];
+  $('#zoomTitle').textContent=d.t;$('#zoomText').innerHTML=`<p>${l==='kid'?d.k:l==='expert'?d.e:d.te}</p>`;
+}
+$$('.zoomtabs .btn').forEach(b=>b.addEventListener('click',()=>{
+  const n=+b.dataset.z;$$('#zoombox svg').forEach(s=>{const i=+s.dataset.z;s.classList.toggle('on',i===n);s.classList.toggle('out',i<n)});
+  $$('.zoomtabs .btn').forEach(x=>{const on=x===b;x.setAttribute('aria-pressed',on);x.className='btn'+(on?'':' ghost')});z=n;renderZoom();
+}));
+
+/* ---------- TOPICS ---------- */
+const TOPICS=[
+ {h:'Herbicides and superweeds',g:'strong',
+  k:'Some GMO seeds are made to survive weed killer. So farmers spray a lot more of it. Now some weeds survive it too.',
+  t:'Most GE acres are "herbicide-tolerant," built to be sprayed. That made one chemical, glyphosate, the most-used herbicide ever, and weeds evolved to survive it.',
+  e:'HT crops shifted weed control toward single-mode-of-action reliance, accelerating selection for resistance. Industry’s answer (dicamba- and 2,4-D-tolerant stacks) has added drift damage to neighboring crops.',
+  m:'Glyphosate blocks the EPSPS enzyme plants need to make certain amino acids. HT crops carry a version of EPSPS that glyphosate can’t block, so the crop lives and the weeds die. Spray the same mode of action across millions of acres and rare resistant weeds take over.',
+  ev:['Global glyphosate use rose roughly 15-fold from 1996 to 2014. '+chip('s4','Benbrook'),'50+ glyphosate-resistant weed species documented worldwide. '+chip('s3','Heap'),'Dicamba over-the-top registrations were vacated by federal courts in 2020 and 2024 after drift complaints. '+chip('s18','EPA')],
+  c:['s4','s3','s18','s1']},
+ {h:'Seed patents and corporate control',g:'strong',
+  k:'Farmers used to save seeds for free. Now big companies own many seeds, and farmers have to buy new ones every year.',
+  t:'GE seeds are patented. Farmers sign agreements not to save them, and a handful of companies sell most of the world’s commercial seed along with the chemicals.',
+  e:'Utility patents on traits plus licensing contracts restrict seed saving and independent research. Post-2018 consolidation concentrates seed and agrochemical markets in four firms.',
+  m:'Patents grant 20 years of exclusive rights. Licensing ("technology use agreements") binds farmers each season. When the seed seller also sells the paired herbicide, it profits twice.',
+  ev:['Supreme Court upheld patent rights over replanted seed. '+chip('s5','Bowman v. Monsanto'),'Merged firms estimated at ~60% of global proprietary seed sales. '+chip('s6','IPES-Food')],
+  c:['s5','s6']},
+ {h:'Monoculture and biodiversity loss',g:'strong',
+  k:'Big farms often grow just one plant on huge fields. That’s bad for bugs, birds, butterflies, and the dirt.',
+  t:'Millions of acres of the same few crops, sprayed clean of anything else, leave little room for pollinators, wildflowers, and soil life. GMOs didn’t invent this, but HT crops made it easier.',
+  e:'Crop genetic uniformity raises epidemic risk and erodes agrobiodiversity. Herbicide-tolerant systems remove in-field non-crop plants, with documented effects on milkweed and monarch habitat.',
+  m:'Uniform genetics means uniform vulnerability. Removing all non-crop plants removes food and shelter for insects and birds, and simplified rotations weaken soil biology.',
+  ev:['Nine plant species account for about 66% of total crop production worldwide. '+chip('s13','FAO 2019'),'1970 corn blight destroyed ~15% of the U.S. crop due to shared genetics. '+chip('s14','Ullstrup'),'Midwest milkweed fell sharply in HT crop fields. '+chip('s12','Pleasants')],
+  c:['s13','s14','s12']},
+ {h:'Labeling and transparency',g:'strong',
+  k:'Food labels are supposed to tell you what’s inside. But the GMO label can be hidden behind a phone code.',
+  t:'Since 2022, U.S. food made with GE ingredients must be disclosed as "bioengineered." But a QR code counts, and highly refined oils and sugars can skip the label entirely.',
+  e:'The National Bioengineered Food Disclosure Standard (mandatory Jan 2022) permits text, symbol, QR, or text-message disclosure and exempts foods without detectable modified genetic material, which covers many refined derivatives.',
+  m:'Refining strips out DNA. If testing can’t detect modified genetic material, the product doesn’t need a disclosure even when it came from a GE crop.',
+  ev:['Disclosure rules and exemptions. '+chip('s15','USDA AMS')],c:['s15','s22']},
+ {h:'Glyphosate: what the science says',g:'debated',
+  k:'Scientists disagree about whether this weed killer can make people sick. They’re still studying it.',
+  t:'The cancer agency of the WHO says "probably causes cancer." The U.S. and European regulators say no at normal levels. Most Americans have some in their bodies.',
+  e:'Hazard (IARC) vs. risk (EPA, EFSA) assessments diverge, partly on which studies were weighed and on formulated products vs. the active ingredient alone. Biomonitoring shows broad population exposure.',
+  m:'IARC asks whether something can cause cancer at any dose. Regulators ask whether it does at real-world exposure. The two questions can give different answers about the same chemical.',
+  ev:['IARC Group 2A, "probably carcinogenic." '+chip('s7','IARC'),'EPA: "not likely to be carcinogenic"; finding remanded by a court in 2022. '+chip('s8','EPA'),'EFSA 2023: no critical concerns; EU renewed approval. '+chip('s9','EFSA'),'Glyphosate found in ~80% of U.S. urine samples. '+chip('s20','NHANES')],
+  c:['s7','s8','s9','s20']},
+ {h:'Are GM foods safe to eat?',g:'strong',
+  k:'Lots of scientists checked, and GMO food doesn’t seem to make people sick by itself. The bigger worries are the sprays and the farms.',
+  t:'This is where we stay honest: big science reviews found approved GM foods are as safe to eat as regular ones. Our case is about the system around them.',
+  e:'NAS 2016 found no substantiated evidence of greater health risk from approved GE foods; WHO concurs while calling for case-by-case assessment. Long-term population data are observational, and new traits still warrant independent review.',
+  m:'Each trait is evaluated on its own. Safety of one approved product doesn’t automatically cover the next, and independent research access has historically been limited by seed licenses.',
+  ev:['NAS 2016 consensus report. '+chip('s1','NAS'),'WHO food safety Q&A. '+chip('s16','WHO')],c:['s1','s16']},
+ {h:'Ultra-processed food and the toxic food system',g:'strong',
+  k:'Lots of packaged snacks are made from GMO corn and soy, plus sugar and chemicals. Your body loves real food more.',
+  t:'Most GE corn and soy end up as cheap ingredients: syrups, oils, starches. Those power the ultra-processed food that fills so many store shelves.',
+  e:'Commodity GE crops supply the base ingredients for UPF. Controlled-trial and umbrella-review evidence links UPF to overeating, weight gain, and multiple chronic disease outcomes.',
+  m:'Ultra-processed foods are engineered for taste and shelf life, are easy to over-eat, and displace fiber and whole-food nutrients.',
+  ev:['~500 kcal/day excess on UPF diet. '+chip('s10','Hall 2019'),'UPF linked to 32 adverse outcomes. '+chip('s11','Lane 2024')],c:['s10','s11']}
+];
+$('#topics').innerHTML=TOPICS.map((t,i)=>`<article class="topic">
+ <div class="topic-head"><span class="topic-num">${String(i+1).padStart(2,'0')}</span><div class="stack"><h3>${t.h}</h3><div><span class="badge b-${t.g}">${t.g}</span></div>
+ <p class="lv k">${t.k}</p><p class="lv t">${t.t}</p><p class="lv e">${t.e}</p></div></div>
+ <details><summary>How it works</summary><div class="body"><p>${t.m}</p></div></details>
+ <details><summary>The evidence</summary><div class="body"><ul>${t.ev.map(x=>`<li>${x}</li>`).join('')}</ul></div></details>
+ <details><summary>Citations</summary><div class="body"><ul>${t.c.map(id=>{const s=SRC.find(x=>x[0]===id);return `<li><a href="#${id}">${s[1]}</a></li>`}).join('')}</ul></div></details>
+</article>`).join('');
+
+TOPICS;
+
+/* ---------- FIELD ---------- */
+const COLS=10,ROWS=6,field=$('#field');let mode='mono',types=[],timer=null;
+const TYPES=['corn','bean','squash','sun','clover'];
+function rng(seed){return()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646}}
+function glyph(t,x,y){
+  if(t==='corn')return `<g class="pl" data-t="corn"><path d="M${x} ${y} V${y-30}" stroke="#2E7D32" stroke-width="3"/><path d="M${x} ${y-12} q-10 -2 -13 -9 M${x} ${y-20} q10 -2 13 -9" stroke="#43A047" stroke-width="3" fill="none"/><rect x="${x+2}" y="${y-24}" width="5" height="11" rx="2.5" fill="#FBC02D"/></g>`;
+  if(t==='bean')return `<g class="pl" data-t="bean"><path d="M${x} ${y} V${y-18}" stroke="#2E7D32" stroke-width="2.5"/><circle cx="${x-6}" cy="${y-16}" r="6" fill="#66BB6A"/><circle cx="${x+6}" cy="${y-20}" r="6" fill="#4CAF50"/><circle cx="${x}" cy="${y-26}" r="5" fill="#81C784"/></g>`;
+  if(t==='squash')return `<g class="pl" data-t="squash"><ellipse cx="${x-4}" cy="${y-8}" rx="10" ry="7" fill="#388E3C"/><circle cx="${x+7}" cy="${y-4}" r="6" fill="#FB8C00" stroke="#11140F" stroke-width="1"/></g>`;
+  if(t==='sun')return `<g class="pl" data-t="sun"><path d="M${x} ${y} V${y-34}" stroke="#2E7D32" stroke-width="3"/><circle cx="${x}" cy="${y-36}" r="8" fill="#FFCA28" stroke="#11140F" stroke-width="1"/><circle cx="${x}" cy="${y-36}" r="3.5" fill="#5D4037"/></g>`;
+  return `<g class="pl" data-t="clover"><circle cx="${x-4}" cy="${y-4}" r="5" fill="#9CCC65"/><circle cx="${x+4}" cy="${y-4}" r="5" fill="#8BC34A"/><circle cx="${x}" cy="${y-9}" r="5" fill="#AED581"/><circle cx="${x}" cy="${y-14}" r="3" fill="#F8BBD0"/></g>`;
+}
+function drawField(){
+  clearInterval(timer);const r=rng(7);types=[];let h='';
+  for(let i=0;i<ROWS;i++){h+=`<path d="M0 ${40+i*34} H360" stroke="#A9834F" stroke-width="2"/>`;}
+  for(let i=0;i<ROWS;i++)for(let j=0;j<COLS;j++){
+    const t=mode==='mono'?'corn':TYPES[Math.floor(r()*TYPES.length)];types.push(t);
+    h+=glyph(t,22+j*35,42+i*34);}
+  field.innerHTML=h;$('#fieldstat').textContent='Release the pest to see how far it spreads.';
+}
+function nb(i){const r=Math.floor(i/COLS),c=i%COLS,o=[];for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){if(!dr&&!dc)continue;const R=r+dr,C=c+dc;if(R>=0&&R<ROWS&&C>=0&&C<COLS)o.push(R*COLS+C)}return o}
+function pest(){
+  drawField();const pls=$$('#field .pl');let start=types.findIndex((t,i)=>t==='corn'&&i>=Math.floor(types.length/2)-4);if(start<0)start=types.indexOf('corn');
+  const seen=new Set([start]);let front=[start];const total=types.filter(t=>t==='corn').length;
+  const step=()=>{front.forEach(i=>pls[i].classList.add('sick'));const nx=[];
+    front.forEach(i=>nb(i).forEach(n=>{if(!seen.has(n)&&types[n]===types[start]){seen.add(n);nx.push(n)}}));
+    $('#fieldstat').textContent=`${seen.size} of ${types.length} plants hit (${Math.round(seen.size/types.length*100)}% of the field)`;
+    front=nx;if(!front.length)clearInterval(timer);};
+  if(reduce){while(front.length)step()}else{step();timer=setInterval(step,320)}
+}
+function setMode(m){mode=m;$('#fMono').setAttribute('aria-pressed',m==='mono');$('#fDiv').setAttribute('aria-pressed',m==='div');$('#fMono').className='btn'+(m==='mono'?'':' ghost');$('#fDiv').className='btn'+(m==='div'?'':' ghost');drawField()}
+$('#fMono').onclick=()=>setMode('mono');$('#fDiv').onclick=()=>setMode('div');$('#fPest').onclick=pest;
+drawField();
+
+/* ---------- MERGERS ---------- */
+const BEFORE=[['Monsanto','US · seeds + Roundup'],['Bayer','Germany · chemicals'],['DuPont','US · Pioneer seeds'],['Dow','US · chemicals'],['Syngenta','Switzerland · seeds + chem'],['BASF','Germany · chemicals']];
+const AFTER=[['Bayer','absorbed Monsanto · 2018'],['Corteva','Dow + DuPont ag · 2019'],['Syngenta Group','bought by ChemChina · 2017'],['BASF','bought Bayer divestitures · 2018']];
+let merged=false;
+function drawMerge(){$('#mgrid').innerHTML=(merged?AFTER:BEFORE).map(([n,s])=>`<div class="co${merged?' big':''}"><b>${n}</b><small>${s}</small></div>`).join('');
+ $('#mergeBtn').textContent=merged?'Show 2015':'Run the mergers';$('#mergeBtn').setAttribute('aria-pressed',merged)}
+$('#mergeBtn').onclick=()=>{if(!merged&&!reduce){$$('#mgrid .co').forEach((c,i)=>setTimeout(()=>c.classList.add('gone'),i*90));setTimeout(()=>{merged=true;drawMerge()},700)}else{merged=!merged;drawMerge()}};
+drawMerge();
+
+/* ---------- LABELS ---------- */
+const LABELS=[
+ ['USDA Organic','No GMOs','strong','Organic rules ban genetic engineering ("excluded methods"), synthetic herbicides like glyphosate, and sewage sludge. The best single label for avoiding GE ingredients.','s21'],
+ ['Non-GMO Project Verified','Tested, not organic','strong','Third-party verification that tests high-risk ingredients against set thresholds. It does not mean organic, so conventional pesticides can still be used.','s22'],
+ ['"Bioengineered"','Contains GE ingredients','strong','The legal U.S. disclosure since 2022. It can appear as words, a round symbol, or just a QR code. Highly refined oils and sugars often skip it.','s15'],
+ ['"Natural" / "All Natural"','Means almost nothing','debated','The FDA has never formally defined "natural." It says nothing about GMOs, pesticides, or processing.','s23'],
+ ['QR code only','Scan to find out','mixed','A QR code can legally satisfy the bioengineered disclosure. If a package only has a code and a "scan for more info" line, scan it in the store.','s15']
+];
+$('#labels').innerHTML=LABELS.map((l,i)=>`<button class="lab" role="tab" aria-selected="${i===0}" data-i="${i}"><span>${l[0]}</span><span class="badge b-${l[2]}">${l[1]}</span></button>`).join('');
+function showLab(i){const l=LABELS[i];$$('.lab').forEach(b=>b.setAttribute('aria-selected',+b.dataset.i===i));
+ $('#labpanel').innerHTML=`<div class="stack"><span class="eyebrow">Label</span><span class="verdict">${l[0]}</span><span><span class="badge b-${l[2]}">${l[1]}</span></span><p>${l[3]}</p><p>${chip(l[4],'Source')}</p></div>`}
+$('#labels').addEventListener('click',e=>{const b=e.target.closest('.lab');if(b)showLab(+b.dataset.i)});showLab(0);
+
+/* ---------- MERCH ---------- */
+const TEE='M78 18 L112 6 Q130 30 148 6 L182 18 L236 58 L210 98 L188 84 L188 248 L72 248 L72 84 L50 98 L24 58 Z';
+const HOOD='M80 30 L104 14 Q130 4 156 14 L180 30 L236 70 L222 160 L196 150 L192 248 L68 248 L64 150 L38 160 L24 70 Z M104 14 Q130 60 156 14';
+const TOTE='M60 80 H200 L210 248 H50 Z M95 80 Q95 20 130 20 Q165 20 165 80';
+const CAP='M40 170 Q40 70 130 66 Q220 70 220 170 Z M40 170 Q130 160 250 196 Q170 202 40 182Z';
+const LOGO=(c='')=>`<span class="logo stacked"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span>`;
+const ITEMS=[
+ {n:'Classic Tee',d:'Heavyweight organic cotton. Front chest print.',p:TEE,cols:[['#11140F','light'],['#ECEBE4','dark'],['#169A44','dark'],['#DD2E28','dark']],art:()=>LOGO()},
+ {n:'Grow Your Own Tee',d:'Back print idea. Pairs with the icon mark on the front.',p:TEE,cols:[['#ECEBE4','dark'],['#11140F','light'],['#FFC531','dark']],art:(t)=>`<span class="slog" style="color:${t==='light'?'#ECF1E3':'#11140F'}">Grow<br><span style="color:#169A44">your</span><br>own</span>`},
+ {n:'Seed Rights Hoodie',d:'Organic fleece. Slogan front, icon on sleeve.',p:HOOD,cols:[['#11140F','light'],['#5A3920','light'],['#ECEBE4','dark']],art:(t)=>`<span class="slog" style="font-size:1.55rem;color:${t==='light'?'#ECF1E3':'#11140F'}">Seeds belong to <span style="color:${t==='light'?'#FF5A4E':'#DD2E28'}">farmers</span></span>`},
+ {n:'Market Tote',d:'Canvas bag for the farmers market.',p:TOTE,cols:[['#E9DFC6','dark'],['#11140F','light']],art:(t)=>`<span class="slog" style="font-size:1.6rem;color:${t==='light'?'#ECF1E3':'#11140F'}">Eat<br>real<br><span style="color:#169A44">food</span></span>`},
+ {n:'O-Mark Cap',d:'Embroidered icon on the front panel.',p:CAP,cols:[['#11140F','light'],['#169A44','dark'],['#ECEBE4','dark']],art:(t)=>`<svg style="width:70px;height:70px;color:${t==='light'?'#ECF1E3':'#11140F'};margin-top:-40px"><use href="#omark"/></svg>`},
+ {n:'F GMOs Tee',d:'Clean version for kids, schools, and family events.',p:TEE,cols:[['#169A44','dark'],['#ECEBE4','dark'],['#11140F','light']],art:()=>`<span class="logo stacked"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span>`}
+];
+$('#merchgrid').innerHTML=ITEMS.map((it,i)=>`<div class="item" data-i="${i}"><div class="mock"><svg class="garment" viewBox="0 0 260 260"><path d="${it.p}" fill="${it.cols[0][0]}" stroke="#11140F" stroke-width="3" fill-rule="evenodd"/></svg><div class="print ${it.cols[0][1]}">${it.art(it.cols[0][1])}</div></div>
+ <div class="item-info"><b>${it.n}</b><span class="muted" style="font-size:.92rem">${it.d}</span><div class="dots">${it.cols.map((c,j)=>`<button class="dot" style="background:${c[0]}" aria-label="Color ${j+1}" aria-pressed="${j===0}" data-j="${j}"></button>`).join('')}</div></div></div>`).join('');
+$('#merchgrid').addEventListener('click',e=>{const d=e.target.closest('.dot');if(!d)return;const card=d.closest('.item'),it=ITEMS[+card.dataset.i],c=it.cols[+d.dataset.j];
+ card.querySelector('.garment path').setAttribute('fill',c[0]);const pr=card.querySelector('.print');pr.className='print '+c[1];pr.innerHTML=it.art(c[1]);
+ card.querySelectorAll('.dot').forEach(x=>x.setAttribute('aria-pressed',x===d))});
+
+/* ---------- NEWSLETTER ---------- */
+$('#newsform').addEventListener('submit',e=>{e.preventDefault();$('#newsmsg').textContent='Preview only. Signups will connect to your email provider at launch.'});
+
+/* ---------- INIT ---------- */
+let saved='teen';try{saved=localStorage.getItem('fg-level')||'teen'}catch(e){}
+setLevel(saved);
+})();
+</script>
+
+</body>
+</html>
