@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
-/* Layout: protest-poster headlines + sticker-style cards over a field-green paper; one sticky bar with the reading-level switch. */
+/* Layout: protest-poster headlines + sticker cards over an illustrated field-paper background; wavy soil-line section edges. */
 :root{
   --bg:#EDF1E4; --surface:#FBFCF7; --surface-2:#DFE6D2; --ink:#11140F; --muted:#4E5646; --line:#11140F;
   --green:#169A44; --green-ink:#0A6A2B; --red:#DD2E28; --yellow:#FFC531; --clay:#B45E2B; --sky:#3FA6D6; --soil:#5A3920; --soil-2:#7A5232;
@@ -42,9 +42,6 @@ section{padding-block:64px;border-top:3px solid var(--line)}
 .stack{display:grid;gap:14px}
 .muted{color:var(--muted)}
 
-/* reading levels */
-body[data-level="kid"] .lv:not(.k),body[data-level="teen"] .lv:not(.t),body[data-level="expert"] .lv:not(.e){display:none!important}
-body[data-level="kid"] h1,body[data-level="kid"] h2,body[data-level="kid"] h3{font-family:var(--kid);text-transform:none;letter-spacing:0;line-height:1.05}
 
 /* top bar */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:3px solid var(--line)}
@@ -54,11 +51,8 @@ body[data-level="kid"] h1,body[data-level="kid"] h2,body[data-level="kid"] h3{fo
 .nav::-webkit-scrollbar{display:none}
 .nav a{flex:none;font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:6px 10px;border:2px solid var(--line);border-radius:999px;background:var(--surface)}
 .nav a:hover{background:var(--yellow);color:var(--on-accent)}
-.level{margin-left:auto;display:flex;border:2.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
-.level button{all:unset;cursor:pointer;font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;color:var(--ink)}
-.level button[aria-checked="true"]{background:var(--ink);color:var(--bg)}
-.level button:focus-visible{outline:3px solid var(--sky);outline-offset:-3px}
-@media (min-width:900px){.nav{order:0;flex-basis:auto}.level{margin-left:0}}
+
+@media (min-width:900px){.nav{order:0;flex-basis:auto}}
 
 /* logo */
 .logo{font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.8;letter-spacing:-.01em;display:inline-flex;gap:.18em;align-items:baseline;white-space:nowrap;color:var(--ink);text-decoration:none}
@@ -69,9 +63,6 @@ body[data-level="kid"] h1,body[data-level="kid"] h2,body[data-level="kid"] h3{fo
 .kidlogo{font-family:var(--kid);font-weight:700;display:inline-flex;align-items:center;gap:.3em;color:var(--green-ink);text-decoration:none;line-height:1;white-space:nowrap}
 .kidlogo svg{height:1.1em;width:1.1em}
 .bar .kidlogo{font-size:1.5rem}
-body[data-level="kid"] .bar .logo.main{display:none}
-body:not([data-level="kid"]) .bar .logo.kidf{display:none}
-body[data-level="kid"] h1.logo{font-family:var(--display);text-transform:uppercase;line-height:.8;letter-spacing:-.01em}
 
 /* hero */
 .hero{padding-block:48px 56px;border-top:0;overflow:hidden;position:relative}
@@ -114,7 +105,6 @@ body[data-level="kid"] h1.logo{font-family:var(--display);text-transform:upperca
 
 /* KID MODE */
 .kid{background:var(--surface-2)}
-.kid h2,.kid h3{font-family:var(--kid);text-transform:none;letter-spacing:0;line-height:1.05}
 .kid .lede{font-family:var(--kid);font-weight:500;color:var(--ink)}
 .kidtag{display:inline-flex;align-self:start;justify-self:start;font-family:var(--kid);font-weight:600;background:var(--green);color:var(--on-accent);border:2.5px solid var(--line);border-radius:999px;padding:3px 14px}
 .story{display:grid;gap:28px}
@@ -178,7 +168,6 @@ body[data-level="kid"] h1.logo{font-family:var(--display);text-transform:upperca
 .front{background:var(--surface)}
 .front .big{font-family:var(--display);font-weight:900;font-size:3.6rem;line-height:.85;color:var(--red)}
 .front p{font-family:var(--display);font-weight:800;font-size:1.45rem;line-height:1.02;text-transform:uppercase}
-body[data-level="kid"] .front p{font-family:var(--kid);text-transform:none;font-weight:600}
 .front .tap{margin-top:auto;font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .back{background:var(--ink);color:var(--bg);transform:rotateY(180deg);font-size:.95rem;line-height:1.45}
 .back .badge{border-color:var(--bg)}
@@ -351,6 +340,38 @@ section.spray{background:#11140F;color:#ECF1E3}
 @keyframes residue{0%,34%{opacity:0}52%,92%{opacity:1}100%{opacity:0}}
 @keyframes drip{0%,48%{opacity:0;transform:scaleY(.2)}70%,92%{opacity:1;transform:scaleY(1.4)}100%{opacity:0}}
 @keyframes stamp{0%,56%{opacity:0;transform:scale(1.8)}62%,92%{opacity:1;transform:scale(1)}100%{opacity:0}}
+/* ---------- illustrated background ---------- */
+:root{--glow-a:rgba(47,184,79,.16);--glow-b:rgba(255,197,49,.20);--glow-c:rgba(221,46,40,.08);--pattern:rgba(17,20,15,.07);--grain-op:.10}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--glow-a:rgba(54,207,101,.12);--glow-b:rgba(255,207,74,.08);--glow-c:rgba(255,90,78,.06);--pattern:rgba(236,241,227,.06);--grain-op:.16}}
+:root[data-theme="dark"]{--glow-a:rgba(54,207,101,.12);--glow-b:rgba(255,207,74,.08);--glow-c:rgba(255,90,78,.06);--pattern:rgba(236,241,227,.06);--grain-op:.16}
+body{background:radial-gradient(1200px 700px at 85% -10%,var(--glow-b),transparent 60%),radial-gradient(900px 700px at -10% 30%,var(--glow-a),transparent 60%),radial-gradient(800px 600px at 110% 80%,var(--glow-c),transparent 60%),var(--bg);background-attachment:fixed;position:relative;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--pattern);-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%20viewBox%3D%220%200%20260%20260%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M-10%2040%20C%2050%2020%2C%2090%2060%2C%20150%2040%20S%20240%2020%2C%20280%2044%22/%3E%3Cpath%20d%3D%22M-10%20110%20C%2050%2090%2C%2090%20130%2C%20150%20110%20S%20240%2090%2C%20280%20114%22/%3E%3Cpath%20d%3D%22M-10%20180%20C%2050%20160%2C%2090%20200%2C%20150%20180%20S%20240%20160%2C%20280%20184%22/%3E%3Cpath%20d%3D%22M-10%20250%20C%2050%20230%2C%2090%20270%2C%20150%20250%20S%20240%20230%2C%20280%20254%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M40%2072%20c-8%20-2%20-12%20-10%20-10%20-18%20c8%202%2012%2010%2010%2018z%22/%3E%3Cpath%20d%3D%22M42%2072%20c6%20-6%2014%20-6%2018%200%20c-6%206%20-14%206%20-18%200z%22/%3E%3Cellipse%20cx%3D%22196%22%20cy%3D%2274%22%20rx%3D%226%22%20ry%3D%224%22%20transform%3D%22rotate%28-30%20196%2074%29%22/%3E%3Cellipse%20cx%3D%22120%22%20cy%3D%22150%22%20rx%3D%225%22%20ry%3D%223.4%22%20transform%3D%22rotate%2825%20120%20150%29%22/%3E%3Cpath%20d%3D%22M214%20214%20c-9%20-3%20-13%20-12%20-10%20-20%20c9%203%2013%2012%2010%2020z%22/%3E%3Ccircle%20cx%3D%2282%22%20cy%3D%22214%22%20r%3D%222.4%22/%3E%3Ccircle%20cx%3D%22160%22%20cy%3D%2216%22%20r%3D%222%22/%3E%3Ccircle%20cx%3D%22240%22%20cy%3D%22140%22%20r%3D%222.2%22/%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%22150%22%20r%3D%221.8%22/%3E%3C/g%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M100%20230%20q6%20-10%200%20-20%20q-6%20-10%200%20-20%20M108%20230%20q-6%20-10%200%20-20%20q6%20-10%200%20-20%22/%3E%3C/g%3E%3C/svg%3E") 0 0/260px 260px repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22260%22%20viewBox%3D%220%200%20260%20260%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M-10%2040%20C%2050%2020%2C%2090%2060%2C%20150%2040%20S%20240%2020%2C%20280%2044%22/%3E%3Cpath%20d%3D%22M-10%20110%20C%2050%2090%2C%2090%20130%2C%20150%20110%20S%20240%2090%2C%20280%20114%22/%3E%3Cpath%20d%3D%22M-10%20180%20C%2050%20160%2C%2090%20200%2C%20150%20180%20S%20240%20160%2C%20280%20184%22/%3E%3Cpath%20d%3D%22M-10%20250%20C%2050%20230%2C%2090%20270%2C%20150%20250%20S%20240%20230%2C%20280%20254%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M40%2072%20c-8%20-2%20-12%20-10%20-10%20-18%20c8%202%2012%2010%2010%2018z%22/%3E%3Cpath%20d%3D%22M42%2072%20c6%20-6%2014%20-6%2018%200%20c-6%206%20-14%206%20-18%200z%22/%3E%3Cellipse%20cx%3D%22196%22%20cy%3D%2274%22%20rx%3D%226%22%20ry%3D%224%22%20transform%3D%22rotate%28-30%20196%2074%29%22/%3E%3Cellipse%20cx%3D%22120%22%20cy%3D%22150%22%20rx%3D%225%22%20ry%3D%223.4%22%20transform%3D%22rotate%2825%20120%20150%29%22/%3E%3Cpath%20d%3D%22M214%20214%20c-9%20-3%20-13%20-12%20-10%20-20%20c9%203%2013%2012%2010%2020z%22/%3E%3Ccircle%20cx%3D%2282%22%20cy%3D%22214%22%20r%3D%222.4%22/%3E%3Ccircle%20cx%3D%22160%22%20cy%3D%2216%22%20r%3D%222%22/%3E%3Ccircle%20cx%3D%22240%22%20cy%3D%22140%22%20r%3D%222.2%22/%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%22150%22%20r%3D%221.8%22/%3E%3C/g%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.4%22%3E%3Cpath%20d%3D%22M100%20230%20q6%20-10%200%20-20%20q-6%20-10%200%20-20%20M108%20230%20q-6%20-10%200%20-20%20q6%20-10%200%20-20%22/%3E%3C/g%3E%3C/svg%3E") 0 0/260px 260px repeat}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22200%22%20height%3D%22200%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%22.9%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22/%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%200%200%200%20.55%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22200%22%20height%3D%22200%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");opacity:var(--grain-op);mix-blend-mode:multiply}
+section{border-top:0;position:relative}
+section:not(.hero)::before{content:"";position:absolute;left:0;right:0;top:-9px;height:18px;background:var(--line);-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%2218%22%20viewBox%3D%220%200%20120%2018%22%3E%3Cpath%20d%3D%22M0%209%20Q15%201%2030%209%20T60%209%20T90%209%20T120%209%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22/%3E%3C/svg%3E") 0 0/120px 18px repeat-x;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22120%22%20height%3D%2218%22%20viewBox%3D%220%200%20120%2018%22%3E%3Cpath%20d%3D%22M0%209%20Q15%201%2030%209%20T60%209%20T90%209%20T120%209%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22/%3E%3C/svg%3E") 0 0/120px 18px repeat-x;z-index:2}
+.bar{background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3)}
+.kid,#facts,#eat{background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 75%,transparent),color-mix(in srgb,var(--surface-2) 40%,transparent))}
+.card,.door,.topic,.step,.fact .front,.lab,.co,.item,.tile,.bin{background-image:linear-gradient(160deg,rgba(255,255,255,.55),rgba(255,255,255,0) 45%)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .card,:root:not([data-theme="light"]) .door,:root:not([data-theme="light"]) .topic,:root:not([data-theme="light"]) .step,:root:not([data-theme="light"]) .fact .front{background-image:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,0) 45%)}}
+
+/* hero: sunburst + illustrated landscape */
+@property --rot{syntax:"<angle>";inherits:false;initial-value:0deg}
+.hero{padding-block:40px 0;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-20% -10% 20% -10%;z-index:-1;background:repeating-conic-gradient(from var(--rot) at 30% 42%,var(--glow-b) 0 7deg,transparent 7deg 20deg);-webkit-mask:radial-gradient(closest-side at 30% 42%,#000 20%,transparent 100%);mask:radial-gradient(closest-side at 30% 42%,#000 20%,transparent 100%);animation:spinrays 90s linear infinite}
+@keyframes spinrays{to{--rot:360deg}}
+.hero-scape{position:relative;margin-top:clamp(-30px,-3vw,-10px);height:clamp(150px,22vw,300px);z-index:-1}
+.hero-scape svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-scape .cl{animation:drift 60s linear infinite}
+.hero-scape .cl.b{animation-duration:90s;animation-delay:-40s}
+.hero-scape .bird{animation:fly 22s linear infinite}
+@keyframes fly{from{transform:translate(-120px,0)}to{transform:translate(1560px,-40px)}}
+.hero-scape .sway{transform-box:fill-box;transform-origin:bottom center;animation:sway 4s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(4deg)}}
+.hero .ticker{margin-top:0}
+.sci{font-size:.9em;color:var(--muted);border-left:3px solid var(--green);padding-left:10px}
+.sci::before{content:"The science: ";font-family:var(--mono);font-size:.78em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-ink)}
+.back .sci{color:#C9D1BD;border-color:#7FE7A0}.back .sci::before{color:#7FE7A0}
+.spray .sci{color:#A9B39C;border-color:#C6F000}.spray .sci::before{color:#C6F000}
 @media (prefers-reduced-motion: reduce){.spray .residue,.spray .drips path,.spray .stamp,.spray .xtal{opacity:1!important}}
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -379,15 +400,9 @@ section.spray{background:#11140F;color:#ECF1E3}
 <header class="bar">
   <div class="wrap bar-in">
     <a class="logo main" href="#top" aria-label="FUCK GMOs home"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></a>
-    <a class="logo kidf" href="#top" aria-label="F GMOs home"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></a>
     <nav class="nav" aria-label="Sections">
-      <a href="#kids">Kids</a><a href="#facts">Quick Facts</a><a href="#deep">Deep Dive</a><a href="#eat">Eat Clean</a><a href="#act">Take Action</a><a href="#merch">Merch</a><a href="#sources">Sources</a>
+      <a href="#kids">Seed to plate</a><a href="#facts">Quick Facts</a><a href="#deep">Deep Dive</a><a href="#eat">Eat Clean</a><a href="#act">Take Action</a><a href="#merch">Merch</a><a href="#sources">Sources</a>
     </nav>
-    <div class="level" role="radiogroup" aria-label="Reading level">
-      <button role="radio" aria-checked="false" data-l="kid">Kid</button>
-      <button role="radio" aria-checked="true" data-l="teen">Teen</button>
-      <button role="radio" aria-checked="false" data-l="expert">Expert</button>
-    </div>
   </div>
 </header>
 
@@ -396,23 +411,36 @@ section.spray{background:#11140F;color:#ECF1E3}
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="lv t e">
+      <div>
         <h1 class="logo stacked" aria-label="FUCK GMOs"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></h1>
       </div>
-      <div class="lv k">
-        <h1 class="logo stacked kidf" aria-label="F GMOs"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></h1>
-      </div>
-      <p class="hook lv t e">Know your seeds. <em>Eat real food.</em></p>
-      <p class="hook lv k" style="font-family:var(--kid);text-transform:none">Where does your food come from?</p>
-      <p class="lede lv k">Follow a tiny seed from the dirt to your dinner plate. Play games and find out what makes food healthy.</p>
-      <p class="lede lv t">Who owns the seeds, what gets sprayed on them, and what ends up on your plate. Fast facts with receipts.</p>
-      <p class="lede lv e">An evidence-graded look at genetically engineered crops and the farming system built around them: herbicide regimes, seed IP, monoculture, labeling, and diet. Every claim is sourced.</p>
+      <p class="hook">Know your seeds. <em>Eat real food.</em></p>
+      <p class="lede">Who owns the seeds, what gets sprayed on them, and what ends up on your plate. Fast facts with receipts.</p>
     </div>
     <div class="doors">
-      <a class="door" href="#kids"><span class="ic" style="background:var(--green)"><svg width="34" height="34"><use href="#sprout"/></svg></span><div><b>Kids</b><span>Grow a seed, meet the soil, play the sorting game</span></div><span class="arr">→</span></a>
+      <a class="door" href="#kids"><span class="ic" style="background:var(--green)"><svg width="34" height="34"><use href="#sprout"/></svg></span><div><b>Start here</b><span>Grow a seed, meet the soil, play the sorting game</span></div><span class="arr">→</span></a>
       <a class="door" href="#facts"><span class="ic" style="background:var(--yellow)"><svg width="30" height="30" viewBox="0 0 30 30"><path d="M17 2 L6 17 H14 L12 28 L24 12 H16 Z" fill="#11140F"/></svg></span><div><b>Quick Facts</b><span>60-second cards. Tap to flip.</span></div><span class="arr">→</span></a>
       <a class="door" href="#deep"><span class="ic" style="background:var(--red)"><svg width="32" height="32" viewBox="0 0 30 30"><circle cx="12" cy="12" r="8" fill="none" stroke="#11140F" stroke-width="3.5"/><path d="M18 18 L27 27" stroke="#11140F" stroke-width="4" stroke-linecap="round"/></svg></span><div><b>Deep Dive</b><span>Mechanisms, studies, data, citations</span></div><span class="arr">→</span></a>
     </div>
+  </div>
+  <div class="hero-scape" aria-hidden="true">
+    <svg viewBox="0 0 1440 360" preserveAspectRatio="xMidYMax slice" style="--row:var(--soil-2)">
+      <defs>
+        <linearGradient id="hs-far" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--green)" stop-opacity=".28"/><stop offset="1" stop-color="var(--green)" stop-opacity=".08"/></linearGradient>
+        <linearGradient id="hs-mid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--green)" stop-opacity=".75"/><stop offset="1" stop-color="var(--green-ink)" stop-opacity=".85"/></linearGradient>
+        <linearGradient id="hs-soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--soil-2)"/><stop offset="1" stop-color="var(--soil)"/></linearGradient>
+        <clipPath id="hs-field"><path d="M0 190 Q360 150 720 168 T1440 182 V360 H0Z"/></clipPath>
+      </defs>
+      <path d="M0 160 Q200 96 420 132 T860 118 T1440 140 V360 H0Z" fill="url(#hs-far)"/>
+      <g fill="var(--green-ink)" opacity=".35"><circle cx="300" cy="128" r="16"/><rect x="298" y="128" width="4" height="18"/><circle cx="1180" cy="118" r="20"/><rect x="1178" y="118" width="4" height="22"/><circle cx="1214" cy="124" r="14"/><rect x="1212" y="124" width="4" height="16"/></g>
+      <g transform="translate(980 108)" opacity=".6"><path d="M0 40 V14 L22 0 L44 14 V40Z" fill="var(--red)" stroke="var(--line)" stroke-width="2.5"/><path d="M-4 16 L22 -2 L48 16" fill="none" stroke="var(--line)" stroke-width="3"/><rect x="16" y="22" width="12" height="18" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/><rect x="52" y="6" width="14" height="34" rx="7" fill="var(--surface-2)" stroke="var(--line)" stroke-width="2.5"/></g>
+      <path d="M0 190 Q360 150 720 168 T1440 182 V360 H0Z" fill="url(#hs-mid)"/>
+      <g clip-path="url(#hs-field)"><path d="M720 150 L-600 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L-450 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L-300 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L-150 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L0 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L150 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L300 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L450 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L600 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L750 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L900 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L1050 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L1200 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L1350 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L1500 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L1650 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/><path d="M720 150 L1800 360" stroke="var(--row)" stroke-width="3" opacity=".55"/><path d="M720 150 L1950 360" stroke="var(--row)" stroke-width="2.2" opacity=".55"/></g>
+      <path d="M0 282 Q360 250 720 268 T1440 280 V360 H0Z" fill="url(#hs-soil)"/>
+      <path d="M0 282 Q360 250 720 268 T1440 280" fill="none" stroke="var(--line)" stroke-width="3"/>
+      <g fill="var(--soil)" opacity=".7"><ellipse cx="420" cy="320" rx="14" ry="6"/><ellipse cx="900" cy="330" rx="10" ry="5"/><ellipse cx="1300" cy="316" rx="12" ry="5"/></g>
+      <g class="sway" style="animation-delay:0.00s"><path d="M60 360 q-2 -30 2 -38" stroke="var(--green-ink)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M61 322 c-14 -2 -22 -12 -22 -22 c14 0 22 10 22 22z M61 316 c12 -4 22 -2 26 8 c-12 4 -22 2 -26 -8z" fill="var(--green)"/></g><g class="sway" style="animation-delay:3.63s"><path d="M180 360 q-2 -44 2 -52" stroke="var(--green-ink)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M181 308 c-14 -2 -22 -12 -22 -22 c14 0 22 10 22 22z M181 302 c12 -4 22 -2 26 8 c-12 4 -22 2 -26 -8z" fill="var(--green)"/></g><g class="sway" style="animation-delay:3.26s"><path d="M330 360 q-2 -26 2 -34" stroke="var(--green-ink)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M331 326 c-14 -2 -22 -12 -22 -22 c14 0 22 10 22 22z M331 320 c12 -4 22 -2 26 8 c-12 4 -22 2 -26 -8z" fill="var(--green)"/></g><g class="sway" style="animation-delay:2.89s"><path d="M1120 360 q-2 -40 2 -48" stroke="var(--green-ink)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M1121 312 c-14 -2 -22 -12 -22 -22 c14 0 22 10 22 22z M1121 306 c12 -4 22 -2 26 8 c-12 4 -22 2 -26 -8z" fill="var(--green)"/></g><g class="sway" style="animation-delay:2.52s"><path d="M1260 360 q-2 -30 2 -38" stroke="var(--green-ink)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M1261 322 c-14 -2 -22 -12 -22 -22 c14 0 22 10 22 22z M1261 316 c12 -4 22 -2 26 8 c-12 4 -22 2 -26 -8z" fill="var(--green)"/></g><g class="sway" style="animation-delay:2.15s"><path d="M1390 360 q-2 -46 2 -54" stroke="var(--green-ink)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M1391 306 c-14 -2 -22 -12 -22 -22 c14 0 22 10 22 22z M1391 300 c12 -4 22 -2 26 8 c-12 4 -22 2 -26 -8z" fill="var(--green)"/></g>
+    </svg>
   </div>
   <div class="ticker" aria-hidden="true"><div>Know your seeds<i>✦</i>Eat real food<i>✦</i>Seeds belong to farmers<i>✦</i>Grow your own<i>✦</i>Read the label<i>✦</i>Support local farms<i>✦</i>Know your seeds<i>✦</i>Eat real food<i>✦</i>Seeds belong to farmers<i>✦</i>Grow your own<i>✦</i>Read the label<i>✦</i>Support local farms<i>✦</i></div></div>
 </section>
@@ -451,7 +479,6 @@ section.spray{background:#11140F;color:#ECF1E3}
         <g class="drips" fill="#C6F000">
           <path d="M318 306 q4 12 0 18 q-4 -6 0 -18z"/><path d="M426 304 q4 14 0 20 q-4 -6 0 -20z"/><path d="M504 310 q4 10 0 16 q-4 -6 0 -16z"/><path d="M560 306 q4 12 0 18 q-4 -6 0 -18z"/>
         </g>
-        <g class="cloud"><circle class="mist" r="20" cx="216" cy="123" style="--dx:141px;--dy:13px;animation-delay:0.04s" fill="url(#sp-mist)"/><circle class="mist" r="9" cx="216" cy="123" style="--dx:217px;--dy:49px;animation-delay:0.25s" fill="url(#sp-mist)"/><circle class="mist" r="9" cx="216" cy="123" style="--dx:37px;--dy:61px;animation-delay:0.05s" fill="url(#sp-mist)"/><circle class="mist" r="10" cx="216" cy="123" style="--dx:177px;--dy:128px;animation-delay:0.11s" fill="url(#sp-mist)"/><circle class="mist" r="18" cx="216" cy="123" style="--dx:250px;--dy:148px;animation-delay:0.20s" fill="url(#sp-mist)"/><circle class="mist" r="23" cx="216" cy="123" style="--dx:375px;--dy:-5px;animation-delay:0.14s" fill="url(#sp-mist)"/><circle class="mist" r="14" cx="216" cy="123" style="--dx:76px;--dy:7px;animation-delay:0.41s" fill="url(#sp-mist)"/><circle class="mist" r="20" cx="216" cy="123" style="--dx:89px;--dy:86px;animation-delay:0.19s" fill="url(#sp-mist)"/><circle class="mist" r="9" cx="216" cy="123" style="--dx:221px;--dy:-2px;animation-delay:0.10s" fill="url(#sp-mist)"/><circle class="mist" r="14" cx="216" cy="123" style="--dx:269px;--dy:60px;animation-delay:0.29s" fill="url(#sp-mist)"/><circle class="mist" r="22" cx="216" cy="123" style="--dx:187px;--dy:38px;animation-delay:0.35s" fill="url(#sp-mist)"/><circle class="mist" r="17" cx="216" cy="123" style="--dx:112px;--dy:85px;animation-delay:0.44s" fill="url(#sp-mist)"/><circle class="mist" r="26" cx="216" cy="123" style="--dx:287px;--dy:36px;animation-delay:0.06s" fill="url(#sp-mist)"/><circle class="mist" r="11" cx="216" cy="123" style="--dx:175px;--dy:116px;animation-delay:0.24s" fill="url(#sp-mist)"/><circle class="mist" r="22" cx="216" cy="123" style="--dx:38px;--dy:101px;animation-delay:0.29s" fill="url(#sp-mist)"/><circle class="mist" r="21" cx="216" cy="123" style="--dx:339px;--dy:40px;animation-delay:0.30s" fill="url(#sp-mist)"/><circle class="mist" r="23" cx="216" cy="123" style="--dx:233px;--dy:65px;animation-delay:0.47s" fill="url(#sp-mist)"/><circle class="mist" r="9" cx="216" cy="123" style="--dx:195px;--dy:100px;animation-delay:0.35s" fill="url(#sp-mist)"/><circle class="mist" r="23" cx="216" cy="123" style="--dx:257px;--dy:156px;animation-delay:0.14s" fill="url(#sp-mist)"/><circle class="mist" r="8" cx="216" cy="123" style="--dx:163px;--dy:101px;animation-delay:0.23s" fill="url(#sp-mist)"/><circle class="mist" r="9" cx="216" cy="123" style="--dx:84px;--dy:7px;animation-delay:0.38s" fill="url(#sp-mist)"/><circle class="mist" r="15" cx="216" cy="123" style="--dx:71px;--dy:29px;animation-delay:0.44s" fill="url(#sp-mist)"/><circle class="mist" r="18" cx="216" cy="123" style="--dx:53px;--dy:63px;animation-delay:0.44s" fill="url(#sp-mist)"/><circle class="mist" r="13" cx="216" cy="123" style="--dx:319px;--dy:134px;animation-delay:0.21s" fill="url(#sp-mist)"/><circle class="mist" r="25" cx="216" cy="123" style="--dx:153px;--dy:137px;animation-delay:0.08s" fill="url(#sp-mist)"/><circle class="mist" r="12" cx="216" cy="123" style="--dx:87px;--dy:26px;animation-delay:0.24s" fill="url(#sp-mist)"/><circle class="mist" r="8" cx="216" cy="123" style="--dx:236px;--dy:32px;animation-delay:0.21s" fill="url(#sp-mist)"/><circle class="mist" r="25" cx="216" cy="123" style="--dx:157px;--dy:83px;animation-delay:0.35s" fill="url(#sp-mist)"/><circle class="mist" r="20" cx="216" cy="123" style="--dx:210px;--dy:92px;animation-delay:0.03s" fill="url(#sp-mist)"/><circle class="mist" r="24" cx="216" cy="123" style="--dx:348px;--dy:120px;animation-delay:0.40s" fill="url(#sp-mist)"/><circle class="mist" r="10" cx="216" cy="123" style="--dx:165px;--dy:55px;animation-delay:0.32s" fill="url(#sp-mist)"/><circle class="mist" r="12" cx="216" cy="123" style="--dx:46px;--dy:-2px;animation-delay:0.08s" fill="url(#sp-mist)"/><circle class="mist" r="8" cx="216" cy="123" style="--dx:146px;--dy:-4px;animation-delay:0.08s" fill="url(#sp-mist)"/><circle class="mist" r="8" cx="216" cy="123" style="--dx:61px;--dy:49px;animation-delay:0.44s" fill="url(#sp-mist)"/></g>
         <!-- bottle -->
         <g class="bottle">
           <rect x="70" y="160" width="100" height="156" rx="24" fill="url(#sp-bottle)" stroke="#11140F" stroke-width="4"/>
@@ -486,11 +513,9 @@ section.spray{background:#11140F;color:#ECF1E3}
     </div>
     <div class="stack spray-copy">
       <span class="eyebrow">What's on your food</span>
-      <h2 class="lv t e">Your food gets sprayed. A lot.</h2>
-      <h2 class="lv k">Some food gets sprayed with chemicals</h2>
-      <p class="lede lv k">Some farms spray chemicals on plants to kill bugs and weeds. Washing fruits and veggies helps, and organic farms skip most of these sprays.</p>
-      <p class="lede lv t">U.S. farms use about a billion pounds of pesticides every year. Residue turns up on many conventional fruits and vegetables. Most samples test under the legal limit, but legal isn't the same as clean. <a class="src" href="#s24">EPA</a> <a class="src" href="#s25">USDA PDP</a></p>
-      <p class="lede lv e">EPA estimates roughly 1.1 billion lbs of pesticide active ingredient were used in the U.S. in 2012. USDA's Pesticide Data Program finds detectable residues on a majority of conventional produce samples each year, with most below EPA tolerances. <a class="src" href="#s24">EPA</a> <a class="src" href="#s25">USDA PDP</a></p>
+      <h2>Your food gets sprayed. A lot.</h2>
+      <p class="lede">U.S. farms use about a billion pounds of pesticides every year. Residue turns up on many conventional fruits and vegetables. Most samples test under the legal limit, but legal isn't the same as clean. <a class="src" href="#s24">EPA</a> <a class="src" href="#s25">USDA PDP</a></p>
+      <p class="lede sci">EPA estimates roughly 1.1 billion lbs of pesticide active ingredient were used in the U.S. in 2012. USDA's Pesticide Data Program finds detectable residues on a majority of conventional produce samples each year, with most below EPA tolerances. <a class="src" href="#s24">EPA</a> <a class="src" href="#s25">USDA PDP</a></p>
       <p><a class="btn" href="#facts">See what's on your food</a></p>
     </div>
   </div>
@@ -500,8 +525,8 @@ section.spray{background:#11140F;color:#ECF1E3}
 <section id="kids" class="kid">
   <div class="wrap">
     <div class="sec-head">
-      <span class="kidtag">Kid Mode</span>
-      <h2>The amazing journey of a seed</h2>
+      <span class="kidtag">Start here</span>
+      <h2>From seed to plate</h2>
       <p class="lede">Scroll down and watch the seed grow.</p>
     </div>
     <div class="story">
@@ -521,8 +546,6 @@ section.spray{background:#11140F;color:#ECF1E3}
           <circle cx="322" cy="66" r="62" fill="url(#pl-sun)" opacity=".9"/>
           <g class="sun"><circle cx="320" cy="70" r="26" fill="#FFD54A" stroke="#11140F" stroke-width="3"/>
             <g stroke="#E0A800" stroke-width="3" stroke-linecap="round"><path d="M320 28v-12M320 124v-12M278 70h-12M374 70h-12M290 40l-8-8M358 108l-8-8M350 40l8-8M282 108l8-8"/></g></g>
-          <g class="cloud"><path d="M40 82 q-2 -22 20 -24 q8 -18 30 -10 q18 -8 26 10 q18 2 16 24 z" fill="#fff" stroke="#11140F" stroke-width="2.5"/></g>
-          <g class="cloud c2"><path d="M180 44 q-2 -16 14 -18 q6 -12 22 -6 q14 -4 18 8 q14 2 12 16 z" fill="#fff" stroke="#11140F" stroke-width="2.5" opacity=".9"/></g>
           <g fill="#2F9E44" opacity=".55"><path d="M0 248 q40 -26 90 -8 q50 -24 110 -4 q60 -22 110 0 q50 -16 90 2 V262 H0Z"/></g>
           <rect x="0" y="258" width="400" height="62" fill="url(#pl-top)"/>
           <rect x="0" y="318" width="400" height="82" fill="url(#pl-sub)"/>
@@ -661,7 +684,7 @@ section.spray{background:#11140F;color:#ECF1E3}
     <div class="sec-head">
       <span class="eyebrow">Deep Dive</span>
       <h2>Go as deep as you want</h2>
-      <p class="lede">Plain summary on top. Open the layers for the mechanism, the evidence, and the citations. Expert mode opens everything.</p>
+      <p class="lede">Plain summary on top. Open the layers for the mechanism, the evidence, and the citations.</p>
     </div>
 
     <!-- DNA zoom -->
@@ -775,9 +798,8 @@ section.spray{background:#11140F;color:#ECF1E3}
           <button class="btn green" id="fPest">Release a pest</button>
         </div>
         <p class="fieldstat" id="fieldstat" aria-live="polite">Release the pest to see how far it spreads.</p>
-        <p class="lv k">When a whole field is the same plant, one bug can eat all of it. When lots of different plants grow together, the bug gets stuck.</p>
-        <p class="lv t e">Uniform fields let one pest or disease run wall to wall. In 1970, Southern corn leaf blight wiped out about 15% of the U.S. corn crop because most hybrids shared the same vulnerable trait. <a class="src" href="#s14">Ullstrup 1972</a></p>
-        <p class="lv e muted">Simulation: the pest spreads to adjacent plants of the same species only. A teaching model, not an epidemiological one.</p>
+        <p>Uniform fields let one pest or disease run wall to wall. In 1970, Southern corn leaf blight wiped out about 15% of the U.S. corn crop because most hybrids shared the same vulnerable trait. <a class="src" href="#s14">Ullstrup 1972</a></p>
+        <p class="sci muted">Simulation: the pest spreads to adjacent plants of the same species only. A teaching model, not an epidemiological one.</p>
       </div>
     </div>
 
@@ -786,8 +808,7 @@ section.spray{background:#11140F;color:#ECF1E3}
       <div class="stack">
         <span class="eyebrow">Interactive · who owns the seeds</span>
         <h3>Six giants became four</h3>
-        <p class="lede lv k">A few very big companies own most of the seeds farmers buy. That means fewer choices.</p>
-        <p class="lede lv t e">Between 2015 and 2019, a wave of mergers folded the "Big Six" seed and chemical firms into four. Several of them sell both the herbicide-tolerant seed and the herbicide. <a class="src" href="#s6">IPES-Food</a></p>
+        <p class="lede">Between 2015 and 2019, a wave of mergers folded the "Big Six" seed and chemical firms into four. Several of them sell both the herbicide-tolerant seed and the herbicide. <a class="src" href="#s6">IPES-Food</a></p>
         <div class="row"><button class="btn" id="mergeBtn" aria-pressed="false">Run the mergers</button></div>
       </div>
       <div class="mgrid" id="mgrid"></div>
@@ -954,20 +975,6 @@ const SNAME={};
 $('#srclist').innerHTML=SRC.map(([id,t,u])=>{SNAME[id]=t.split('(')[0].split('.')[0].trim();return `<li id="${id}"><span>${t} <a href="${u}" target="_blank" rel="noopener">Link</a></span></li>`}).join('');
 const chip=(id,label)=>`<a class="src" href="#${id}">${label}</a>`;
 
-/* ---------- LEVEL ---------- */
-function setLevel(l){
-  document.body.dataset.level=l;
-  $$('.level button').forEach(b=>b.setAttribute('aria-checked',b.dataset.l===l));
-  $$('#topics details').forEach(d=>d.open=(l==='expert'));
-  renderZoom();
-  try{localStorage.setItem('fg-level',l)}catch(e){}
-}
-$$('.level button').forEach(b=>b.addEventListener('click',()=>setLevel(b.dataset.l)));
-$('.level').addEventListener('keydown',e=>{
-  if(!['ArrowLeft','ArrowRight'].includes(e.key))return;
-  const bs=$$('.level button'),i=bs.findIndex(b=>b.getAttribute('aria-checked')==='true');
-  const n=bs[(i+(e.key==='ArrowRight'?1:bs.length-1))%bs.length];n.focus();setLevel(n.dataset.l);
-});
 
 /* ---------- SEED GROW ON SCROLL ---------- */
 const plant=$('#plant'),stage=$('.stage'),steps=$('#steps');
@@ -1052,8 +1059,8 @@ const FACTS=[
   e:'Maize was domesticated from teosinte in southern Mexico ~9,000 years ago (Doebley 2004). Breeding shuffles existing genes; transgenesis inserts DNA across species barriers.',s:['s19','Doebley 2004']}
 ];
 $('#factgrid').innerHTML=FACTS.map((c,i)=>`<div class="fact" tabindex="0" role="button" aria-label="Fact card: ${c.f}. Press to flip.">
- <div class="fact-in"><div class="face front"><span class="big">${c.big}</span><p class="lv t e">${c.f}</p><p class="lv k">${c.fk}</p><span class="tap">Tap to flip ↻</span></div>
- <div class="face back"><p class="lv k">${c.k}</p><p class="lv t">${c.t}</p><p class="lv e">${c.e}</p>
+ <div class="fact-in"><div class="face front"><span class="big">${c.big}</span><p>${c.f}</p><span class="tap">Tap to flip ↻</span></div>
+ <div class="face back"><p>${c.t}</p><p class="sci">${c.e}</p>
  <div class="foot"><span class="badge b-${c.g}">${c.g}</span>${chip(c.s[0],c.s[1])}</div></div></div></div>`).join('');
 $$('.fact').forEach(f=>{const t=()=>f.classList.toggle('flip');f.addEventListener('click',e=>{if(e.target.closest('a'))return;t()});f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t()}})});
 
@@ -1078,8 +1085,8 @@ const ZOOM=[
 ];
 let z=0;
 function renderZoom(){
-  const l=document.body.dataset.level||'teen',d=ZOOM[z];
-  $('#zoomTitle').textContent=d.t;$('#zoomText').innerHTML=`<p>${l==='kid'?d.k:l==='expert'?d.e:d.te}</p>`;
+  const d=ZOOM[z];
+  $('#zoomTitle').textContent=d.t;$('#zoomText').innerHTML=`<p>${d.te}</p><p class="sci">${d.e}</p>`;
 }
 $$('.zoomtabs .btn').forEach(b=>b.addEventListener('click',()=>{
   const n=+b.dataset.z;$$('#zoombox svg').forEach(s=>{const i=+s.dataset.z;s.classList.toggle('on',i===n);s.classList.toggle('out',i<n)});
@@ -1136,8 +1143,7 @@ const TOPICS=[
   ev:['~500 kcal/day excess on UPF diet. '+chip('s10','Hall 2019'),'UPF linked to 32 adverse outcomes. '+chip('s11','Lane 2024')],c:['s10','s11']}
 ];
 $('#topics').innerHTML=TOPICS.map((t,i)=>`<article class="topic">
- <div class="topic-head"><span class="topic-num">${String(i+1).padStart(2,'0')}</span><div class="stack"><h3>${t.h}</h3><div><span class="badge b-${t.g}">${t.g}</span></div>
- <p class="lv k">${t.k}</p><p class="lv t">${t.t}</p><p class="lv e">${t.e}</p></div></div>
+ <div class="topic-head"><span class="topic-num">${String(i+1).padStart(2,'0')}</span><div class="stack"><h3>${t.h}</h3><div><span class="badge b-${t.g}">${t.g}</span></div><p>${t.t}</p><p class="sci">${t.e}</p></div></div>
  <details><summary>How it works</summary><div class="body"><p>${t.m}</p></div></details>
  <details><summary>The evidence</summary><div class="body"><ul>${t.ev.map(x=>`<li>${x}</li>`).join('')}</ul></div></details>
  <details><summary>Citations</summary><div class="body"><ul>${t.c.map(id=>{const s=SRC.find(x=>x[0]===id);return `<li><a href="#${id}">${s[1]}</a></li>`}).join('')}</ul></div></details>
@@ -1225,8 +1231,7 @@ $('#merchgrid').addEventListener('click',e=>{const d=e.target.closest('.dot');if
 $('#newsform').addEventListener('submit',e=>{e.preventDefault();$('#newsmsg').textContent='Preview only. Signups will connect to your email provider at launch.'});
 
 /* ---------- INIT ---------- */
-let saved='teen';try{saved=localStorage.getItem('fg-level')||'teen'}catch(e){}
-setLevel(saved);
+renderZoom();
 })();
 </script>
 
