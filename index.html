@@ -401,7 +401,7 @@ section:not(.hero)::before{content:"";position:absolute;left:0;right:0;top:-9px;
   <div class="wrap bar-in">
     <a class="logo main" href="#top" aria-label="FUCK GMOs home"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></a>
     <nav class="nav" aria-label="Sections">
-      <a href="#kids">Seed to plate</a><a href="#facts">Quick Facts</a><a href="#deep">Deep Dive</a><a href="#eat">Eat Clean</a><a href="#act">Take Action</a><a href="#merch">Merch</a><a href="#sources">Sources</a>
+      <a href="#kids">Seed to plate</a><a href="#facts">Quick Facts</a><a href="#deep">Deep Dive</a><a href="#eat">Eat Clean</a><a href="#act">Take Action</a><a href="#sources">Sources</a>
     </nav>
   </div>
 </header>
@@ -909,18 +909,6 @@ section:not(.hero)::before{content:"";position:absolute;left:0;right:0;top:-9px;
   </div>
 </section>
 
-<!-- MERCH -->
-<section id="merch">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Merch · first drop concepts</span>
-      <h2>Wear the message</h2>
-      <p class="lede">Tap the color dots to try each garment. Print-ready files come next.</p>
-    </div>
-    <div class="merch" id="merchgrid"></div>
-  </div>
-</section>
-
 <!-- SOURCES -->
 <section id="sources">
   <div class="wrap">
@@ -1209,26 +1197,6 @@ $('#labels').innerHTML=LABELS.map((l,i)=>`<button class="lab" role="tab" aria-se
 function showLab(i){const l=LABELS[i];$$('.lab').forEach(b=>b.setAttribute('aria-selected',+b.dataset.i===i));
  $('#labpanel').innerHTML=`<div class="stack"><span class="eyebrow">Label</span><span class="verdict">${l[0]}</span><span><span class="badge b-${l[2]}">${l[1]}</span></span><p>${l[3]}</p><p>${chip(l[4],'Source')}</p></div>`}
 $('#labels').addEventListener('click',e=>{const b=e.target.closest('.lab');if(b)showLab(+b.dataset.i)});showLab(0);
-
-/* ---------- MERCH ---------- */
-const TEE='M78 18 L112 6 Q130 30 148 6 L182 18 L236 58 L210 98 L188 84 L188 248 L72 248 L72 84 L50 98 L24 58 Z';
-const HOOD='M80 30 L104 14 Q130 4 156 14 L180 30 L236 70 L222 160 L196 150 L192 248 L68 248 L64 150 L38 160 L24 70 Z M104 14 Q130 60 156 14';
-const TOTE='M60 80 H200 L210 248 H50 Z M95 80 Q95 20 130 20 Q165 20 165 80';
-const CAP='M40 170 Q40 70 130 66 Q220 70 220 170 Z M40 170 Q130 160 250 196 Q170 202 40 182Z';
-const LOGO=(c='')=>`<span class="logo stacked"><span class="w1">FUCK</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span>`;
-const ITEMS=[
- {n:'Classic Tee',d:'Heavyweight organic cotton. Front chest print.',p:TEE,cols:[['#11140F','light'],['#ECEBE4','dark'],['#169A44','dark'],['#DD2E28','dark']],art:()=>LOGO()},
- {n:'Grow Your Own Tee',d:'Back print idea. Pairs with the icon mark on the front.',p:TEE,cols:[['#ECEBE4','dark'],['#11140F','light'],['#FFC531','dark']],art:(t)=>`<span class="slog" style="color:${t==='light'?'#ECF1E3':'#11140F'}">Grow<br><span style="color:#169A44">your</span><br>own</span>`},
- {n:'Seed Rights Hoodie',d:'Organic fleece. Slogan front, icon on sleeve.',p:HOOD,cols:[['#11140F','light'],['#5A3920','light'],['#ECEBE4','dark']],art:(t)=>`<span class="slog" style="font-size:1.55rem;color:${t==='light'?'#ECF1E3':'#11140F'}">Seeds belong to <span style="color:${t==='light'?'#FF5A4E':'#DD2E28'}">farmers</span></span>`},
- {n:'Market Tote',d:'Canvas bag for the farmers market.',p:TOTE,cols:[['#E9DFC6','dark'],['#11140F','light']],art:(t)=>`<span class="slog" style="font-size:1.6rem;color:${t==='light'?'#ECF1E3':'#11140F'}">Eat<br>real<br><span style="color:#169A44">food</span></span>`},
- {n:'O-Mark Cap',d:'Embroidered icon on the front panel.',p:CAP,cols:[['#11140F','light'],['#169A44','dark'],['#ECEBE4','dark']],art:(t)=>`<svg style="width:70px;height:70px;color:${t==='light'?'#ECF1E3':'#11140F'};margin-top:-40px"><use href="#omark"/></svg>`},
- {n:'F GMOs Tee',d:'Clean version for kids, schools, and family events.',p:TEE,cols:[['#169A44','dark'],['#ECEBE4','dark'],['#11140F','light']],art:()=>`<span class="logo stacked"><span class="w1">F</span><span class="w2">GM<svg class="omark"><use href="#omark"/></svg>S</span></span>`}
-];
-$('#merchgrid').innerHTML=ITEMS.map((it,i)=>`<div class="item" data-i="${i}"><div class="mock"><svg class="garment" viewBox="0 0 260 260"><path d="${it.p}" fill="${it.cols[0][0]}" stroke="#11140F" stroke-width="3" fill-rule="evenodd"/></svg><div class="print ${it.cols[0][1]}">${it.art(it.cols[0][1])}</div></div>
- <div class="item-info"><b>${it.n}</b><span class="muted" style="font-size:.92rem">${it.d}</span><div class="dots">${it.cols.map((c,j)=>`<button class="dot" style="background:${c[0]}" aria-label="Color ${j+1}" aria-pressed="${j===0}" data-j="${j}"></button>`).join('')}</div></div></div>`).join('');
-$('#merchgrid').addEventListener('click',e=>{const d=e.target.closest('.dot');if(!d)return;const card=d.closest('.item'),it=ITEMS[+card.dataset.i],c=it.cols[+d.dataset.j];
- card.querySelector('.garment path').setAttribute('fill',c[0]);const pr=card.querySelector('.print');pr.className='print '+c[1];pr.innerHTML=it.art(c[1]);
- card.querySelectorAll('.dot').forEach(x=>x.setAttribute('aria-pressed',x===d))});
 
 /* ---------- NEWSLETTER ---------- */
 $('#newsform').addEventListener('submit',e=>{e.preventDefault();$('#newsmsg').textContent='Preview only. Signups will connect to your email provider at launch.'});
